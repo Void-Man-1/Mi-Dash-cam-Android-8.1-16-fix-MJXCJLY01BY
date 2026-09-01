@@ -109,7 +109,7 @@ Version 1.1.6 additionally maps legacy page IDs `36`, `54`, `38`, `32`, and `66`
 
 The offline pages identify the exact model and separate Xiaomi-published specifications/installation guidance from app-derived Android troubleshooting. Version 1.1.9 bundles four reviewed MJXCJLY01BY PDFs directly in the APK: English phone-friendly, English complete landscape, Russian phone-friendly, and Russian original landscape. Each is named explicitly at the top of the User manual page.
 
-Local PDF links are intercepted before the legacy WebView can render them. The opener accepts only the four safe asset names, copies the selected asset to `cache/manuals`, obtains a content URI from a non-exported `FileProvider`, and sends `ACTION_VIEW` with MIME type `application/pdf` plus a temporary read grant. The provider exposes only the private manual-cache directory. All four packaged PDF hashes match their reviewed sources exactly.
+Local PDF links are intercepted before the legacy WebView can render them. The User manual UI exposes four bundled PDF files. `ManualPdfOpener` accepts a PDF basename only when it contains no slash, backslash, or `..`, and the operation succeeds only when that name resolves to an existing packaged asset. It copies the selected asset to `cache/manuals`, obtains a content URI from a non-exported `FileProvider`, and sends `ACTION_VIEW` with MIME type `application/pdf` plus a temporary read grant. The provider exposes only the private manual-cache directory. All four packaged PDF hashes match their reviewed sources exactly.
 
 ### Live-preview freeze and retry loop
 
@@ -169,7 +169,7 @@ A clean-install 1.1.9 packet capture covering launch, Account, My dash cam, and 
 6. Media scan: exposed broadcast URI replaced by `MediaScannerConnection.scanFile()`.
 7. Added seven `arm64-v8a` libraries: IJK FFmpeg/player/SDL and VLC anw/compat/core/JNI.
 8. Added bundled offline Tips, Installation, User manual, FAQ, Wi-Fi help, and shared responsive styling; routed the corresponding buttons locally and added stale legacy-URL fallbacks in both WebView namespaces.
-9. Bundled four clearly named MJXCJLY01BY manuals and added a private-cache/FileProvider PDF-opening path restricted to those assets.
+9. Bundled four clearly named MJXCJLY01BY manuals and added a private-cache/FileProvider PDF-opening path that validates a traversal-safe PDF basename and requires a matching packaged asset.
 10. Changed VLC preview startup handling from a five-second, main-thread stop/recreate loop to a 20-second, single-failure path without synchronous teardown; canceled pending callbacks and corrected spinner clearing.
 11. Added VLC's `--rtsp-tcp` instance option so the camera's RTP/JPEG preview is interleaved over the RTSP TCP connection.
 12. Disabled only the obsolete blocking/recommended application-update dialogs; the separate camera firmware-update path is unchanged.

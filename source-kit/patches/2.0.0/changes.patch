@@ -1,0 +1,976 @@
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 8c6e6ed..a5fd86d 100644
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -3 +2,0 @@
+-    <uses-permission android:name="com.xiaomi.permission.AUTH_SERVICE"/>
+@@ -13 +12,5 @@
+-    <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:name="com.banyac.mijia.app.MiJiaApp" android:supportsRtl="true" android:theme="@style/AppTheme">
++    <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:name="com.banyac.mijia.app.MiJiaApp" android:supportsRtl="true" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
++        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
++        <provider android:authorities="com.banyac.mijia.app.eu.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="android.support.v4.content.FileProvider">
++            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/manual_file_paths"/>
++        </provider>
+@@ -20 +22,0 @@
+-        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/home_name" android:launchMode="singleTop" android:name="com.banyac.mijia.app.ui.activity.login.LoginActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.Login"/>
+@@ -34 +35,0 @@
+-        <activity android:name="com.xiaomi.account.openauth.AuthorizeActivity"/>
+@@ -40,2 +40,0 @@
+-        <meta-data android:name="XIAOMI_APPID" android:value="L2882303761517680798"/>
+-        <meta-data android:name="XIAOMI_REDIRECT_URL" android:value="http://xiaomi.com"/>
+diff --git a/apktool.yml b/apktool.yml
+index ca77272..41bd7b0 100644
+--- a/apktool.yml
++++ b/apktool.yml
+@@ -8 +8 @@ sdkInfo:
+-  targetSdkVersion: 23
++  targetSdkVersion: 28
+@@ -10,2 +10,2 @@ versionInfo:
+-  versionCode: 26
+-  versionName: 1.1.0
++  versionCode: 20000
++  versionName: 2.0.0
+diff --git a/assets/default_config.xml b/assets/default_config.xml
+index 0879c24..8dcd8ed 100644
+--- a/assets/default_config.xml
++++ b/assets/default_config.xml
+@@ -33,5 +33,5 @@
+-        <using-skills>https://eu-help.70mai.com/36.html</using-skills>
+-        <instruction>https://eu-help.70mai.com/38.html</instruction>
+-        <install-guide>https://eu-help.70mai.com/54.html</install-guide>
+-        <faq>https://eu-help.70mai.com/32.html</faq>
+-        <wifi-help>https://eu-help.70mai.com/66.html</wifi-help>
++        <using-skills>file:///android_asset/help/tips.html</using-skills>
++        <instruction>file:///android_asset/help/manual.html</instruction>
++        <install-guide>file:///android_asset/help/installation.html</install-guide>
++        <faq>file:///android_asset/help/faq.html</faq>
++        <wifi-help>file:///android_asset/help/wifi.html</wifi-help>
+@@ -39 +39 @@
+-</app-config>
+\ No newline at end of file
++</app-config>
+diff --git a/res/layout/activity_main.xml b/res/layout/activity_main.xml
+index 77ee761..c9229d4 100644
+--- a/res/layout/activity_main.xml
++++ b/res/layout/activity_main.xml
+@@ -8 +8 @@
+-    <com.banyac.mijia.app.ui.view.PtrClassicRefreshLayout android:id="@id/content_container" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@id/error_container" app:ptr_resistance="1.7" app:ptr_ratio_of_header_height_to_refresh="1.2" app:ptr_duration_to_close="200" app:ptr_duration_to_close_header="1000" app:ptr_pull_to_fresh="false" app:ptr_keep_header_when_refresh="true">
++    <com.banyac.mijia.app.ui.view.PtrClassicRefreshLayout android:id="@id/content_container" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_above="@id/patch_info_container" android:layout_below="@id/error_container" app:ptr_resistance="1.7" app:ptr_ratio_of_header_height_to_refresh="1.2" app:ptr_duration_to_close="200" app:ptr_duration_to_close_header="1000" app:ptr_pull_to_fresh="false" app:ptr_keep_header_when_refresh="true">
+@@ -35,0 +36,4 @@
++    <LinearLayout android:orientation="vertical" android:gravity="center" android:id="@+id/patch_info_container" android:layout_width="match_parent" android:layout_height="48.0dp" android:layout_above="@id/firmware_container">
++        <TextView android:textSize="11.0sp" android:textColor="#777777" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/patch_credit" />
++        <TextView android:textSize="11.0sp" android:textColor="#777777" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dp" android:text="@string/patch_version" />
++    </LinearLayout>
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index efe7a3c..cb9ce48 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -112 +112 @@
+-    <string name="midr_v1_connect_retry">Tap to connect again</string>
++    <string name="midr_v1_connect_retry">Connection expired. Tap to reconnect.</string>
+@@ -244,0 +245,2 @@ Tap the screen to refresh."</string>
++    <string name="patch_credit">Patched by Void__Man</string>
++    <string name="patch_version">Version: 2.0.0</string>
+diff --git a/smali/com/banyac/midrive/a/b.smali b/smali/com/banyac/midrive/a/b.smali
+index 06cf90a..63cdbd8 100644
+--- a/smali/com/banyac/midrive/a/b.smali
++++ b/smali/com/banyac/midrive/a/b.smali
+@@ -288 +288 @@
+-    new-instance v0, Landroid/content/Intent;
++    invoke-virtual {p1}, Lcom/banyac/midrive/a/a/b;->g()Ljava/io/File;
+@@ -290 +290 @@
+-    const-string v2, "android.intent.action.MEDIA_SCANNER_SCAN_FILE"
++    move-result-object v0
+@@ -292 +292 @@
+-    invoke-direct {v0, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
++    invoke-virtual {v0}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
+@@ -294,2 +294 @@
+-    .line 258
+-    invoke-virtual {p1}, Lcom/banyac/midrive/a/a/b;->g()Ljava/io/File;
++    move-result-object v0
+@@ -297 +296 @@
+-    move-result-object v2
++    const/4 v2, 0x1
+@@ -299 +298 @@
+-    invoke-static {v2}, Landroid/net/Uri;->fromFile(Ljava/io/File;)Landroid/net/Uri;
++    new-array v2, v2, [Ljava/lang/String;
+@@ -301 +300 @@
+-    move-result-object v2
++    const/4 v3, 0x0
+@@ -303 +302 @@
+-    invoke-virtual {v0, v2}, Landroid/content/Intent;->setData(Landroid/net/Uri;)Landroid/content/Intent;
++    aput-object v0, v2, v3
+@@ -305,2 +304 @@
+-    .line 259
+-    iget-object v2, p0, Lcom/banyac/midrive/a/b;->h:Landroid/content/Context;
++    iget-object v0, p0, Lcom/banyac/midrive/a/b;->h:Landroid/content/Context;
+@@ -308 +306 @@
+-    invoke-virtual {v2, v0}, Landroid/content/Context;->sendBroadcast(Landroid/content/Intent;)V
++    invoke-static {v0, v2, v3, v3}, Landroid/media/MediaScannerConnection;->scanFile(Landroid/content/Context;[Ljava/lang/String;[Ljava/lang/String;Landroid/media/MediaScannerConnection$OnScanCompletedListener;)V
+diff --git a/smali/com/banyac/midrive/base/ui/BaseWebViewActivity$3.smali b/smali/com/banyac/midrive/base/ui/BaseWebViewActivity$3.smali
+index 175a186..da789cb 100644
+--- a/smali/com/banyac/midrive/base/ui/BaseWebViewActivity$3.smali
++++ b/smali/com/banyac/midrive/base/ui/BaseWebViewActivity$3.smali
+@@ -424,0 +425,78 @@
++
++.method public shouldOverrideUrlLoading(Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;)Z
++    .locals 1
++    .annotation build Landroid/annotation/TargetApi;
++        value = 0x15
++    .end annotation
++
++    invoke-interface {p2}, Landroid/webkit/WebResourceRequest;->getUrl()Landroid/net/Uri;
++
++    move-result-object v0
++
++    invoke-virtual {v0}, Landroid/net/Uri;->toString()Ljava/lang/String;
++
++    move-result-object v0
++
++    invoke-virtual {p0, p1, v0}, Lcom/banyac/midrive/base/ui/BaseWebViewActivity$3;->shouldOverrideUrlLoading(Landroid/webkit/WebView;Ljava/lang/String;)Z
++
++    move-result v0
++
++    return v0
++.end method
++
++.method public shouldOverrideUrlLoading(Landroid/webkit/WebView;Ljava/lang/String;)Z
++    .locals 3
++
++    if-eqz p2, :manual_link_webview
++
++    iget-object v0, p0, Lcom/banyac/midrive/base/ui/BaseWebViewActivity$3;->a:Lcom/banyac/midrive/base/ui/BaseWebViewActivity;
++
++    invoke-static {v0, p2}, Lcom/banyac/mijia/app/util/ManualPdfOpener;->open(Landroid/content/Context;Ljava/lang/String;)Z
++
++    move-result v0
++
++    if-eqz v0, :bundled_manual_not_handled
++
++    const/4 v0, 0x1
++
++    return v0
++
++    :bundled_manual_not_handled
++
++    const-string v0, "mi-house.ru/asserts/instructions/3516/1/MJXCJLY01BY.pdf"
++
++    invoke-virtual {p2, v0}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v0
++
++    if-eqz v0, :manual_link_webview
++
++    :try_start_manual_link
++    invoke-static {p2}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
++
++    move-result-object v0
++
++    new-instance v1, Landroid/content/Intent;
++
++    const-string v2, "android.intent.action.VIEW"
++
++    invoke-direct {v1, v2, v0}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
++
++    iget-object v0, p0, Lcom/banyac/midrive/base/ui/BaseWebViewActivity$3;->a:Lcom/banyac/midrive/base/ui/BaseWebViewActivity;
++
++    invoke-virtual {v0, v1}, Lcom/banyac/midrive/base/ui/BaseWebViewActivity;->startActivity(Landroid/content/Intent;)V
++    :try_end_manual_link
++    .catch Ljava/lang/Exception; {:try_start_manual_link .. :try_end_manual_link} :catch_manual_link
++
++    const/4 v0, 0x1
++
++    return v0
++
++    :catch_manual_link
++    move-exception v0
++
++    :manual_link_webview
++    const/4 v0, 0x0
++
++    return v0
++.end method
+diff --git a/smali/com/banyac/mijia/app/b/d.smali b/smali/com/banyac/mijia/app/b/d.smali
+index 60d65ce..75f4420 100644
+--- a/smali/com/banyac/mijia/app/b/d.smali
++++ b/smali/com/banyac/mijia/app/b/d.smali
+@@ -226,0 +227,5 @@
++    # The remote account service is abandonware.  A cloud "session expired"
++    # response must not eject a cached/local user from otherwise local camera
++    # functionality; report it to the ordinary callback instead.
++    goto :cond_1
++
+diff --git a/smali/com/banyac/mijia/app/c/b.smali b/smali/com/banyac/mijia/app/c/b.smali
+index 2db1ee1..2074454 100644
+--- a/smali/com/banyac/mijia/app/c/b.smali
++++ b/smali/com/banyac/mijia/app/c/b.smali
+@@ -1427,0 +1428,4 @@
++    # Preserve the profile's userId only as the local device-database
++    # namespace. Never report a legacy Mi account identifier to 70mai.
++    const-string v0, "offline-local"
++
+@@ -1451,0 +1456,5 @@
++    # Xiaomi's app-update endpoint is abandoned.  Keep configuration and
++    # dash-cam firmware handling, but never block startup with the stale app
++    # update dialog.
++    goto :goto_0
++
+@@ -1797,0 +1807,4 @@
++    # Suppress the corresponding optional app-update dialog as well.  This
++    # method is unrelated to the camera firmware OTA activity.
++    goto :goto_0
++
+@@ -2138,0 +2152,4 @@
++    # The OTA-status endpoint labels this field xiaomiId. Keep any migrated
++    # account identifier local and send an anonymous offline value instead.
++    const-string v1, "offline-local"
++
+diff --git a/smali/com/banyac/mijia/app/c/c.smali b/smali/com/banyac/mijia/app/c/c.smali
+index eeb5587..58dddd0 100644
+--- a/smali/com/banyac/mijia/app/c/c.smali
++++ b/smali/com/banyac/mijia/app/c/c.smali
+@@ -170,0 +171,7 @@
++
++    if-eqz v0, :cond_0
++
++    # Upgrade existing installations in place: keep the previous user ID only
++    # as the local device-database namespace, but strip every account credential
++    # and avatar field before the profile can be used again.
++    invoke-virtual {p0, v0}, Lcom/banyac/mijia/app/c/c;->a(Lcom/banyac/mijia/app/model/XiaomiUserProfile;)V
+@@ -187 +194,21 @@
+-    const/4 v0, 0x0
++    # No cloud profile is required for the camera's local Wi-Fi protocol.
++    # A stable, non-account ID is used only as the local database namespace.
++    new-instance v0, Lcom/banyac/mijia/app/model/XiaomiUserProfile;
++
++    invoke-direct {v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;-><init>()V
++
++    const-string v1, "local-device-user"
++
++    invoke-virtual {v0, v1}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setUserId(Ljava/lang/String;)V
++
++    const-string v1, "Offline account"
++
++    invoke-virtual {v0, v1}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoNick(Ljava/lang/String;)V
++
++    const-string v1, ""
++
++    invoke-virtual {v0, v1}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setToken(Ljava/lang/String;)V
++
++    invoke-virtual {v0, v1}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoIcon(Ljava/lang/String;)V
++
++    invoke-virtual {p0, v0}, Lcom/banyac/mijia/app/c/c;->a(Lcom/banyac/mijia/app/model/XiaomiUserProfile;)V
+@@ -195,0 +223,22 @@
++    # Never persist a Xiaomi login.  A legacy user ID is retained only so an
++    # upgrade can still find locally paired cameras and downloads.
++    const-string v0, ""
++
++    invoke-virtual {p1, v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setToken(Ljava/lang/String;)V
++
++    invoke-virtual {p1, v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoIcon(Ljava/lang/String;)V
++
++    invoke-virtual {p1, v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoIcon_75(Ljava/lang/String;)V
++
++    invoke-virtual {p1, v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoIcon_90(Ljava/lang/String;)V
++
++    invoke-virtual {p1, v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoIcon_120(Ljava/lang/String;)V
++
++    invoke-virtual {p1, v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoIcon_320(Ljava/lang/String;)V
++
++    invoke-virtual {p1, v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoIcon_orig(Ljava/lang/String;)V
++
++    const-string v0, "Offline account"
++
++    invoke-virtual {p1, v0}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->setMiliaoNick(Ljava/lang/String;)V
++
+@@ -262 +311 @@
+-    const-class v2, Lcom/banyac/mijia/app/ui/activity/login/LoginActivity;
++    const-class v2, Lcom/banyac/mijia/app/ui/activity/MainActivity;
+@@ -324 +373 @@
+-    const-class v2, Lcom/banyac/mijia/app/ui/activity/login/LoginActivity;
++    const-class v2, Lcom/banyac/mijia/app/ui/activity/MainActivity;
+diff --git a/smali/com/banyac/mijia/app/ui/activity/AgreementActivity$1$1.smali b/smali/com/banyac/mijia/app/ui/activity/AgreementActivity$1$1.smali
+index c66cb15..5a97c39 100644
+--- a/smali/com/banyac/mijia/app/ui/activity/AgreementActivity$1$1.smali
++++ b/smali/com/banyac/mijia/app/ui/activity/AgreementActivity$1$1.smali
+@@ -80,0 +81,3 @@
++    # Do not disclose a migrated Mi account identifier to the legacy legal API.
++    const-string v1, "offline-local"
++
+diff --git a/smali/com/banyac/mijia/app/ui/activity/AgreementPrivacyUpgrade.smali b/smali/com/banyac/mijia/app/ui/activity/AgreementPrivacyUpgrade.smali
+index 2d5e542..2092dd6 100644
+--- a/smali/com/banyac/mijia/app/ui/activity/AgreementPrivacyUpgrade.smali
++++ b/smali/com/banyac/mijia/app/ui/activity/AgreementPrivacyUpgrade.smali
+@@ -752,0 +753,3 @@
++    # Do not disclose a migrated Mi account identifier to the legacy legal API.
++    const-string v1, "offline-local"
++
+diff --git a/smali/com/banyac/mijia/app/ui/activity/login/SplashActivity.smali b/smali/com/banyac/mijia/app/ui/activity/login/SplashActivity.smali
+index 2fff6e7..fbd8b22 100644
+--- a/smali/com/banyac/mijia/app/ui/activity/login/SplashActivity.smali
++++ b/smali/com/banyac/mijia/app/ui/activity/login/SplashActivity.smali
+@@ -180 +180 @@
+-    const-class v1, Lcom/banyac/mijia/app/ui/activity/login/LoginActivity;
++    const-class v1, Lcom/banyac/mijia/app/ui/activity/MainActivity;
+diff --git a/smali/com/banyac/mijia/app/ui/activity/login/SplashActivity$1.smali b/smali/com/banyac/mijia/app/ui/activity/login/SplashActivity$1.smali
+index 24df8f9..a839b38 100644
+--- a/smali/com/banyac/mijia/app/ui/activity/login/SplashActivity$1.smali
++++ b/smali/com/banyac/mijia/app/ui/activity/login/SplashActivity$1.smali
+@@ -60 +60 @@
+-    const-class v2, Lcom/banyac/mijia/app/ui/activity/login/LoginActivity;
++    const-class v2, Lcom/banyac/mijia/app/ui/activity/MainActivity;
+diff --git a/smali/com/banyac/mijia/app/ui/activity/MainActivity.smali b/smali/com/banyac/mijia/app/ui/activity/MainActivity.smali
+index 169befc..d281de8 100644
+--- a/smali/com/banyac/mijia/app/ui/activity/MainActivity.smali
++++ b/smali/com/banyac/mijia/app/ui/activity/MainActivity.smali
+@@ -1012 +1012 @@
+-    sget-object v2, Lcom/banyac/mijia/app/a/a;->Q:Ljava/lang/String;
++    const-string v2, "file:///android_asset/help/tips.html"
+@@ -1045 +1045 @@
+-    sget-object v2, Lcom/banyac/mijia/app/a/a;->R:Ljava/lang/String;
++    const-string v2, "file:///android_asset/help/installation.html"
+@@ -1078 +1078 @@
+-    sget-object v2, Lcom/banyac/mijia/app/a/a;->S:Ljava/lang/String;
++    const-string v2, "file:///android_asset/help/manual.html"
+@@ -1111 +1111 @@
+-    sget-object v2, Lcom/banyac/mijia/app/a/a;->T:Ljava/lang/String;
++    const-string v2, "file:///android_asset/help/faq.html"
+diff --git a/smali/com/banyac/mijia/app/ui/activity/PrivacyActivity$1$1.smali b/smali/com/banyac/mijia/app/ui/activity/PrivacyActivity$1$1.smali
+index f1f6c79..6ac5477 100644
+--- a/smali/com/banyac/mijia/app/ui/activity/PrivacyActivity$1$1.smali
++++ b/smali/com/banyac/mijia/app/ui/activity/PrivacyActivity$1$1.smali
+@@ -80,0 +81,3 @@
++    # Do not disclose a migrated Mi account identifier to the legacy legal API.
++    const-string v1, "offline-local"
++
+diff --git a/smali/com/banyac/mijia/app/ui/activity/UserCenterActivity.smali b/smali/com/banyac/mijia/app/ui/activity/UserCenterActivity.smali
+index 7b65ec6..828ab4b 100644
+--- a/smali/com/banyac/mijia/app/ui/activity/UserCenterActivity.smali
++++ b/smali/com/banyac/mijia/app/ui/activity/UserCenterActivity.smali
+@@ -20,3 +19,0 @@
+-.field private h:Ljava/lang/String;
+-
+-
+@@ -134,49 +131 @@
+-    .locals 5
+-
+-    .prologue
+-    .line 66
+-    invoke-static {p0}, Lcom/banyac/mijia/app/c/c;->a(Landroid/content/Context;)Lcom/banyac/mijia/app/c/c;
+-
+-    move-result-object v0
+-
+-    .line 67
+-    invoke-static {p0}, Lcom/banyac/midrive/base/service/h;->c(Landroid/content/Context;)Lcom/banyac/midrive/base/service/c;
+-
+-    move-result-object v1
+-
+-    .line 68
+-    invoke-virtual {v0}, Lcom/banyac/mijia/app/c/c;->a()Lcom/banyac/mijia/app/model/XiaomiUserProfile;
+-
+-    move-result-object v2
+-
+-    .line 69
+-    invoke-virtual {v2}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->getMiliaoIcon()Ljava/lang/String;
+-
+-    move-result-object v3
+-
+-    iget-object v4, p0, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->c:Landroid/widget/ImageView;
+-
+-    invoke-interface {v1, v3, v4}, Lcom/banyac/midrive/base/service/c;->b(Ljava/lang/String;Landroid/widget/ImageView;)V
+-
+-    .line 70
+-    iget-object v3, p0, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->d:Landroid/widget/TextView;
+-
+-    invoke-virtual {v2}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->getMiliaoNick()Ljava/lang/String;
+-
+-    move-result-object v4
+-
+-    invoke-virtual {v3, v4}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+-
+-    .line 71
+-    iget-object v3, p0, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->e:Landroid/widget/TextView;
+-
+-    invoke-virtual {v2}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->getUserId()Ljava/lang/String;
+-
+-    move-result-object v4
+-
+-    invoke-virtual {v3, v4}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+-
+-    .line 73
+-    new-instance v3, Lcom/banyac/mijia/app/b/a/a;
+-
+-    new-instance v4, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity$1;
++    .locals 2
+@@ -184 +133,3 @@
+-    invoke-direct {v4, p0, v0, v1}, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity$1;-><init>(Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;Lcom/banyac/mijia/app/c/c;Lcom/banyac/midrive/base/service/c;)V
++    # This build has no Mi-account mode.  Render a fixed local identity and
++    # never consult stored profile data or a remote account-profile service.
++    iget-object v0, p0, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->d:Landroid/widget/TextView;
+@@ -186 +137 @@
+-    invoke-direct {v3, p0, v4}, Lcom/banyac/mijia/app/b/a/a;-><init>(Landroid/content/Context;Lcom/banyac/mijia/app/b/e;)V
++    const-string v1, "Offline account"
+@@ -188 +139 @@
+-    iget-object v0, p0, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->h:Ljava/lang/String;
++    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+@@ -190,2 +141 @@
+-    .line 88
+-    invoke-virtual {v2}, Lcom/banyac/mijia/app/model/XiaomiUserProfile;->getToken()Ljava/lang/String;
++    iget-object v0, p0, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->e:Landroid/widget/TextView;
+@@ -193 +143 @@
+-    move-result-object v1
++    const-string v1, "No Mi account connected"
+@@ -195 +145 @@
+-    invoke-virtual {v3, v0, v1}, Lcom/banyac/mijia/app/b/a/a;->a(Ljava/lang/String;Ljava/lang/String;)V
++    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+@@ -197 +146,0 @@
+-    .line 89
+@@ -253 +202 @@
+-    .locals 3
++    .locals 1
+@@ -269,37 +217,0 @@
+-    .line 44
+-    :try_start_0
+-    invoke-virtual {p0}, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->getPackageManager()Landroid/content/pm/PackageManager;
+-
+-    move-result-object v0
+-
+-    invoke-virtual {p0}, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->getPackageName()Ljava/lang/String;
+-
+-    move-result-object v1
+-
+-    const/16 v2, 0x80
+-
+-    invoke-virtual {v0, v1, v2}, Landroid/content/pm/PackageManager;->getApplicationInfo(Ljava/lang/String;I)Landroid/content/pm/ApplicationInfo;
+-
+-    move-result-object v0
+-
+-    .line 46
+-    iget-object v0, v0, Landroid/content/pm/ApplicationInfo;->metaData:Landroid/os/Bundle;
+-
+-    const-string v1, "XIAOMI_APPID"
+-
+-    invoke-virtual {v0, v1}, Landroid/os/Bundle;->getString(Ljava/lang/String;)Ljava/lang/String;
+-
+-    move-result-object v0
+-
+-    const/4 v1, 0x1
+-
+-    invoke-virtual {v0, v1}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+-
+-    move-result-object v0
+-
+-    iput-object v0, p0, Lcom/banyac/mijia/app/ui/activity/UserCenterActivity;->h:Ljava/lang/String;
+-    :try_end_0
+-    .catch Landroid/content/pm/PackageManager$NameNotFoundException; {:try_start_0 .. :try_end_0} :catch_0
+-
+-    .line 50
+-    :goto_0
+@@ -313,9 +224,0 @@
+-
+-    .line 47
+-    :catch_0
+-    move-exception v0
+-
+-    .line 48
+-    invoke-virtual {v0}, Landroid/content/pm/PackageManager$NameNotFoundException;->printStackTrace()V
+-
+-    goto :goto_0
+diff --git a/smali/com/banyac/mijia/app/ui/activity/WebViewActivity.smali b/smali/com/banyac/mijia/app/ui/activity/WebViewActivity.smali
+index b2fbdc9..660ed6f 100644
+--- a/smali/com/banyac/mijia/app/ui/activity/WebViewActivity.smali
++++ b/smali/com/banyac/mijia/app/ui/activity/WebViewActivity.smali
+@@ -94,0 +95,77 @@
++    if-eqz v0, :help_return
++
++    const-string v1, "eu-help.70mai.com/36.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_check_manual
++
++    const-string v0, "file:///android_asset/help/tips.html"
++
++    iput-object v0, p0, Lcom/banyac/mijia/app/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    goto :help_return
++
++    :help_check_manual
++    const-string v1, "eu-help.70mai.com/38.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_check_installation
++
++    const-string v0, "file:///android_asset/help/manual.html"
++
++    iput-object v0, p0, Lcom/banyac/mijia/app/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    goto :help_return
++
++    :help_check_installation
++    const-string v1, "eu-help.70mai.com/54.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_check_faq
++
++    const-string v0, "file:///android_asset/help/installation.html"
++
++    iput-object v0, p0, Lcom/banyac/mijia/app/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    goto :help_return
++
++    :help_check_faq
++    const-string v1, "eu-help.70mai.com/32.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_check_wifi
++
++    const-string v0, "file:///android_asset/help/faq.html"
++
++    iput-object v0, p0, Lcom/banyac/mijia/app/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    goto :help_return
++
++    :help_check_wifi
++    const-string v1, "eu-help.70mai.com/66.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_return
++
++    const-string v0, "file:///android_asset/help/wifi.html"
++
++    iput-object v0, p0, Lcom/banyac/mijia/app/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    :help_return
++    iget-object v0, p0, Lcom/banyac/mijia/app/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
+diff --git a/smali/com/midr/cardvr/b/a/e.smali b/smali/com/midr/cardvr/b/a/e.smali
+index 2fcd9a1..e5cd24f 100644
+--- a/smali/com/midr/cardvr/b/a/e.smali
++++ b/smali/com/midr/cardvr/b/a/e.smali
+@@ -84 +84 @@
+-    .locals 6
++    .locals 7
+@@ -86,0 +87,12 @@
++    new-instance v0, Lcom/banyac/midrive/volley/DefaultRetryPolicy;
++
++    const/16 v1, 0xfa0
++
++    const/4 v2, 0x0
++
++    const/high16 v3, 0x3f800000    # 1.0f
++
++    invoke-direct {v0, v1, v2, v3}, Lcom/banyac/midrive/volley/DefaultRetryPolicy;-><init>(IIF)V
++
++    move-object v6, v0
++
+@@ -114 +126 @@
+-    invoke-interface/range {v0 .. v5}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZ)V
++    invoke-interface/range {v0 .. v6}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZLcom/banyac/midrive/volley/RetryPolicy;)V
+diff --git a/smali/com/midr/cardvr/b/a/g.smali b/smali/com/midr/cardvr/b/a/g.smali
+index 156038c..5103cf8 100644
+--- a/smali/com/midr/cardvr/b/a/g.smali
++++ b/smali/com/midr/cardvr/b/a/g.smali
+@@ -84 +84 @@
+-    .locals 6
++    .locals 7
+@@ -86,0 +87,12 @@
++    new-instance v0, Lcom/banyac/midrive/volley/DefaultRetryPolicy;
++
++    const/16 v1, 0xfa0
++
++    const/4 v2, 0x0
++
++    const/high16 v3, 0x3f800000    # 1.0f
++
++    invoke-direct {v0, v1, v2, v3}, Lcom/banyac/midrive/volley/DefaultRetryPolicy;-><init>(IIF)V
++
++    move-object v6, v0
++
+@@ -114 +126 @@
+-    invoke-interface/range {v0 .. v5}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZ)V
++    invoke-interface/range {v0 .. v6}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZLcom/banyac/midrive/volley/RetryPolicy;)V
+diff --git a/smali/com/midr/cardvr/b/a/i.smali b/smali/com/midr/cardvr/b/a/i.smali
+index 9515be6..206eccc 100644
+--- a/smali/com/midr/cardvr/b/a/i.smali
++++ b/smali/com/midr/cardvr/b/a/i.smali
+@@ -677 +677 @@
+-    .locals 6
++    .locals 7
+@@ -679,0 +680,12 @@
++    new-instance v0, Lcom/banyac/midrive/volley/DefaultRetryPolicy;
++
++    const/16 v1, 0xfa0
++
++    const/4 v2, 0x0
++
++    const/high16 v3, 0x3f800000    # 1.0f
++
++    invoke-direct {v0, v1, v2, v3}, Lcom/banyac/midrive/volley/DefaultRetryPolicy;-><init>(IIF)V
++
++    move-object v6, v0
++
+@@ -707 +719 @@
+-    invoke-interface/range {v0 .. v5}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZ)V
++    invoke-interface/range {v0 .. v6}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZLcom/banyac/midrive/volley/RetryPolicy;)V
+diff --git a/smali/com/midr/cardvr/b/a/j.smali b/smali/com/midr/cardvr/b/a/j.smali
+index b99695f..2c64f46 100644
+--- a/smali/com/midr/cardvr/b/a/j.smali
++++ b/smali/com/midr/cardvr/b/a/j.smali
+@@ -142 +142 @@
+-    .locals 6
++    .locals 7
+@@ -144,0 +145,12 @@
++    new-instance v0, Lcom/banyac/midrive/volley/DefaultRetryPolicy;
++
++    const/16 v1, 0xfa0
++
++    const/4 v2, 0x0
++
++    const/high16 v3, 0x3f800000    # 1.0f
++
++    invoke-direct {v0, v1, v2, v3}, Lcom/banyac/midrive/volley/DefaultRetryPolicy;-><init>(IIF)V
++
++    move-object v6, v0
++
+@@ -172 +184 @@
+-    invoke-interface/range {v0 .. v5}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZ)V
++    invoke-interface/range {v0 .. v6}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZLcom/banyac/midrive/volley/RetryPolicy;)V
+diff --git a/smali/com/midr/cardvr/b/a/k.smali b/smali/com/midr/cardvr/b/a/k.smali
+index e315df7..0ce4a8d 100644
+--- a/smali/com/midr/cardvr/b/a/k.smali
++++ b/smali/com/midr/cardvr/b/a/k.smali
+@@ -248 +248 @@
+-    .locals 6
++    .locals 7
+@@ -250,0 +251,12 @@
++    new-instance v0, Lcom/banyac/midrive/volley/DefaultRetryPolicy;
++
++    const/16 v1, 0xfa0
++
++    const/4 v2, 0x0
++
++    const/high16 v3, 0x3f800000    # 1.0f
++
++    invoke-direct {v0, v1, v2, v3}, Lcom/banyac/midrive/volley/DefaultRetryPolicy;-><init>(IIF)V
++
++    move-object v6, v0
++
+@@ -278 +290 @@
+-    invoke-interface/range {v0 .. v5}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZ)V
++    invoke-interface/range {v0 .. v6}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZLcom/banyac/midrive/volley/RetryPolicy;)V
+diff --git a/smali/com/midr/cardvr/b/a/l.smali b/smali/com/midr/cardvr/b/a/l.smali
+index 99c1a5e..7349001 100644
+--- a/smali/com/midr/cardvr/b/a/l.smali
++++ b/smali/com/midr/cardvr/b/a/l.smali
+@@ -112 +112 @@
+-    .locals 6
++    .locals 7
+@@ -114,0 +115,12 @@
++    new-instance v0, Lcom/banyac/midrive/volley/DefaultRetryPolicy;
++
++    const/16 v1, 0xfa0
++
++    const/4 v2, 0x0
++
++    const/high16 v3, 0x3f800000    # 1.0f
++
++    invoke-direct {v0, v1, v2, v3}, Lcom/banyac/midrive/volley/DefaultRetryPolicy;-><init>(IIF)V
++
++    move-object v6, v0
++
+@@ -142 +154 @@
+-    invoke-interface/range {v0 .. v5}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZ)V
++    invoke-interface/range {v0 .. v6}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/String;Lcom/banyac/midrive/base/service/b/b;ZZZLcom/banyac/midrive/volley/RetryPolicy;)V
+diff --git a/smali/com/midr/cardvr/ui/activity/guide/StepTwoActivity$2.smali b/smali/com/midr/cardvr/ui/activity/guide/StepTwoActivity$2.smali
+index 15f2b20..7417501 100644
+--- a/smali/com/midr/cardvr/ui/activity/guide/StepTwoActivity$2.smali
++++ b/smali/com/midr/cardvr/ui/activity/guide/StepTwoActivity$2.smali
+@@ -55 +55 @@
+-    sget-object v2, Lcom/midr/cardvr/MstarDeviceManager;->H5_WIFI_HELPER:Ljava/lang/String;
++    const-string v2, "file:///android_asset/help/wifi.html"
+diff --git a/smali/com/midr/cardvr/ui/activity/MainActivity.smali b/smali/com/midr/cardvr/ui/activity/MainActivity.smali
+index ec35762..c62d6a8 100644
+--- a/smali/com/midr/cardvr/ui/activity/MainActivity.smali
++++ b/smali/com/midr/cardvr/ui/activity/MainActivity.smali
+@@ -279 +279 @@
+-    .locals 1
++    .locals 2
+@@ -281,0 +282,14 @@
++    invoke-static {p0}, Lcom/banyac/midrive/base/service/h;->b(Landroid/content/Context;)Lcom/banyac/midrive/base/service/d;
++
++    move-result-object v0
++
++    invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
++
++    move-result-object v1
++
++    invoke-virtual {v1}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
++
++    move-result-object v1
++
++    invoke-interface {v0, v1}, Lcom/banyac/midrive/base/service/d;->a(Ljava/lang/Object;)V
++
+diff --git a/smali/com/midr/cardvr/ui/activity/WebViewActivity.smali b/smali/com/midr/cardvr/ui/activity/WebViewActivity.smali
+index 5a1d84f..a93b553 100644
+--- a/smali/com/midr/cardvr/ui/activity/WebViewActivity.smali
++++ b/smali/com/midr/cardvr/ui/activity/WebViewActivity.smali
+@@ -94,0 +95,77 @@
++    if-eqz v0, :help_return
++
++    const-string v1, "eu-help.70mai.com/36.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_check_manual
++
++    const-string v0, "file:///android_asset/help/tips.html"
++
++    iput-object v0, p0, Lcom/midr/cardvr/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    goto :help_return
++
++    :help_check_manual
++    const-string v1, "eu-help.70mai.com/38.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_check_installation
++
++    const-string v0, "file:///android_asset/help/manual.html"
++
++    iput-object v0, p0, Lcom/midr/cardvr/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    goto :help_return
++
++    :help_check_installation
++    const-string v1, "eu-help.70mai.com/54.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_check_faq
++
++    const-string v0, "file:///android_asset/help/installation.html"
++
++    iput-object v0, p0, Lcom/midr/cardvr/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    goto :help_return
++
++    :help_check_faq
++    const-string v1, "eu-help.70mai.com/32.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_check_wifi
++
++    const-string v0, "file:///android_asset/help/faq.html"
++
++    iput-object v0, p0, Lcom/midr/cardvr/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    goto :help_return
++
++    :help_check_wifi
++    const-string v1, "eu-help.70mai.com/66.html"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++
++    move-result v1
++
++    if-eqz v1, :help_return
++
++    const-string v0, "file:///android_asset/help/wifi.html"
++
++    iput-object v0, p0, Lcom/midr/cardvr/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
++    :help_return
++    iget-object v0, p0, Lcom/midr/cardvr/ui/activity/WebViewActivity;->d:Ljava/lang/String;
++
+diff --git a/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment.smali b/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment.smali
+index 285b5bb..938c175 100644
+--- a/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment.smali
++++ b/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment.smali
+@@ -20 +20 @@
+-.field public static final PLAY_TIMEOUT:I = 0x1388
++.field public static final PLAY_TIMEOUT:I = 0x4e20
+@@ -352,0 +353,4 @@
++    iget-object v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->mMainHandler:Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler;
++
++    invoke-virtual {v0, v1}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
++
+@@ -607,0 +612,4 @@
++    iget-object v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->mMainHandler:Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler;
++
++    invoke-virtual {v0, v1}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
++
+@@ -887,0 +896,9 @@
++    iget-object v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->mMainHandler:Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler;
++
++    if-eqz v0, :cond_1
++
++    const/4 v1, 0x0
++
++    invoke-virtual {v0, v1}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler;->removeCallbacksAndMessages(Ljava/lang/Object;)V
++
++    :cond_1
+@@ -917 +933,0 @@
+-    .line 201
+@@ -920,6 +936 @@
+-    const/4 v1, 0x3
+-
+-    if-ge v0, v1, :cond_0
+-
+-    .line 202
+-    iget v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->mPlayRetryCount:I
++    if-nez v0, :cond_0
+@@ -927 +938 @@
+-    add-int/lit8 v0, v0, 0x1
++    const/4 v0, 0x1
+@@ -931,20 +942 @@
+-    .line 203
+-    new-instance v0, Ljava/lang/StringBuilder;
+-
+-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
+-
+-    const-string v1, "PlayRetryCount:"
+-
+-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    move-result-object v0
+-
+-    iget v1, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->mPlayRetryCount:I
+-
+-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+-
+-    move-result-object v0
+-
+-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object v0
++    const-string v0, "Live preview failed or timed out; automatic restart suppressed"
+@@ -954,4 +946 @@
+-    .line 204
+-    const/16 v0, 0x64
+-
+-    invoke-virtual {p0, v0}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->play(I)V
++    const/4 v0, 0x0
+@@ -959,3 +948 @@
+-    .line 209
+-    :goto_0
+-    return-void
++    iput-boolean v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->mPlaying:Z
+@@ -963,3 +950 @@
+-    .line 207
+-    :cond_0
+-    const/4 v0, 0x0
++    invoke-virtual {p0}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->removeLoadIng()V
+@@ -967 +952 @@
+-    iput v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->mPlayRetryCount:I
++    invoke-virtual {p0}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->showDefaultPreview()V
+@@ -969 +953,0 @@
+-    .line 208
+@@ -971,0 +956,2 @@
++    if-eqz v0, :cond_0
++
+@@ -974 +960,2 @@
+-    goto :goto_0
++    :cond_0
++    return-void
+diff --git a/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$1.smali b/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$1.smali
+index efddea6..e8e4535 100644
+--- a/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$1.smali
++++ b/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$1.smali
+@@ -44 +44 @@
+-    const/16 v0, 0x5f
++    const/4 v0, 0x1
+@@ -125,5 +124,0 @@
+-    invoke-virtual {v0}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->stop()V
+-
+-    .line 111
+-    iget-object v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$1;->this$0:Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;
+-
+@@ -166,0 +162,4 @@
++    iget-object v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$1;->this$0:Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;
++
++    invoke-virtual {v0}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->removeLoadIng()V
++
+diff --git a/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$4.smali b/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$4.smali
+index ce90cbf..445302b 100644
+--- a/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$4.smali
++++ b/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$4.smali
+@@ -80 +80 @@
+-    const-wide/16 v2, 0x1388
++    const-wide/16 v2, 0x4e20
+diff --git a/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler.smali b/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler.smali
+index 0cc355c..d8ada01 100644
+--- a/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler.smali
++++ b/smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler.smali
+@@ -52,5 +51,0 @@
+-    invoke-virtual {v0}, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;->stop()V
+-
+-    .line 360
+-    iget-object v0, p0, Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler;->this$0:Lorg/videolan/libvlc/media/VlcRtspStreamPlayerFragment;
+-
+diff --git a/smali/org/videolan/libvlc/media/VlcVideoViewer.smali b/smali/org/videolan/libvlc/media/VlcVideoViewer.smali
+index 347abeb..fa61498 100644
+--- a/smali/org/videolan/libvlc/media/VlcVideoViewer.smali
++++ b/smali/org/videolan/libvlc/media/VlcVideoViewer.smali
+@@ -1797,0 +1798,9 @@
++    # The dash cam's live endpoint is RTP/JPEG.  Force RTP interleaving on
++    # the RTSP control connection so a nominally accepted but unfed UDP
++    # session cannot leave the preview permanently black.
++    iget-object v0, p0, Lorg/videolan/libvlc/media/VlcVideoViewer;->mLibvlcOptions:Ljava/util/ArrayList;
++
++    const-string v1, "--rtsp-tcp"
++
++    invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
++
+diff --git a/smali/org/videolan/libvlc/MediaPlayer.smali b/smali/org/videolan/libvlc/MediaPlayer.smali
+index 682e230..9cbfccc 100644
+--- a/smali/org/videolan/libvlc/MediaPlayer.smali
++++ b/smali/org/videolan/libvlc/MediaPlayer.smali
+@@ -219,0 +220,9 @@
++.method static synthetic access$300(Lorg/videolan/libvlc/MediaPlayer;)V
++    .locals 0
++
++    .prologue
++    invoke-direct {p0}, Lorg/videolan/libvlc/MediaPlayer;->nativeStop()V
++
++    return-void
++.end method
++
+@@ -1244 +1253 @@
+-    .locals 1
++    .locals 2
+@@ -1272 +1281,9 @@
+-    invoke-direct {p0}, Lorg/videolan/libvlc/MediaPlayer;->nativeStop()V
++    new-instance v0, Ljava/lang/Thread;
++
++    new-instance v1, Lorg/videolan/libvlc/MediaPlayer$2;
++
++    invoke-direct {v1, p0}, Lorg/videolan/libvlc/MediaPlayer$2;-><init>(Lorg/videolan/libvlc/MediaPlayer;)V
++
++    invoke-direct {v0, v1}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;)V
++
++    invoke-virtual {v0}, Ljava/lang/Thread;->start()V

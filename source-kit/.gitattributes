@@ -1,0 +1,11 @@
+# Keep all published patch inputs deterministic across contributor platforms.
+*.patch text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+*.ps1 text eol=lf
+*.java text eol=lf
+*.smali text eol=lf
+*.xml text eol=lf
+*.html text eol=lf
+*.css text eol=lf

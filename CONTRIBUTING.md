@@ -30,6 +30,8 @@ The Poco F6 / Android 16 / HyperOS 3 real-camera acceptance pass is complete for
 
 ## Changes
 
+Use the [patch source kit](source-kit/README.md) to prepare the verified original EU APK locally, apply the reviewed compatibility transformations, and build an unsigned test APK. Keep the original APK, complete decompiled tree, vendor assets and libraries, manuals, signing material, generated workspaces, and other local inputs out of Git; the source kit documents the exact input and licensing boundaries.
+
 Keep patches narrowly scoped. Preserve the EU package name, the original firmware-update row, local camera protocols, recording behavior, and the offline-account privacy guarantees unless a change explicitly documents and tests a migration.
 
 Never commit the private patch signing key, Xiaomi's original APK, user/device data, or raw captures containing identifiers.

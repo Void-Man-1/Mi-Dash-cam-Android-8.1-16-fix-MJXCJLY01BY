@@ -1,0 +1,794 @@
+{
+  "schemaVersion": 1,
+  "releaseVersion": "2.0.0",
+  "packageName": "com.banyac.mijia.app.eu",
+  "cameraModel": "Xiaomi Mi Dash Cam MJXCJLY01BY",
+  "region": "EU",
+  "originalApkSha256": "3AC4C02EF5D43A0F9636637B1359073818C6799F3BFE3A7E2A38633F653D95A8",
+  "apktoolVersion": "3.0.3",
+  "workspaceRelativePath": "work/apktool",
+  "textPatch": "changes.patch",
+  "addedFilesDirectory": "files",
+  "deleteList": "delete-paths.txt",
+  "fileChanges": [
+    {
+      "path": "AndroidManifest.xml",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "2F276FC288C7891E140CF9BBC5D1DDBEC9EBCE725A55C509B5D79834AE02328D",
+      "patchedSha256": "C9408C48D004B4F9959CD0262E6DF59630E745BE536762596A2D6900A8446684"
+    },
+    {
+      "path": "apktool.yml",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "DA890ECF35B88EDA4CDEDC10ADCABA29625FFAC6C9DE230BBDC87E45F2D8F3B2",
+      "patchedSha256": "38F2011358DE70AB00B13D9D93937E7435ABC533FF870A9C7CBAA8C79AC599E0"
+    },
+    {
+      "path": "assets/default_config.xml",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "11F5CAA6B1EB5885423127864F969921EB8E13C89AEA2361FFA0E4CE39F37051",
+      "patchedSha256": "E0225D2163D2FE273C6515D5823E73FA243CC301DA92168795BA2771395203C2"
+    },
+    {
+      "path": "res/layout/activity_main.xml",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "1138A5C5293BC6D7EEA79120DE6918DF9FA7D6614D1D4E28C5C0861CC4A8E2C2",
+      "patchedSha256": "91E616A4EF888BB6CE4822F322AAB7B09887E07BF879D69DBE341055A8FEDCDC"
+    },
+    {
+      "path": "res/values/strings.xml",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "C317BF9D998088CA7DEDFEFB5CD6C8B90BE29F0DE9C216025404CEAB50B2F2FD",
+      "patchedSha256": "BBC324FBA2A2E473FC9FA4BC6EB4C6D2BAE1413E5221F03DEA790DE50E3BF930"
+    },
+    {
+      "path": "smali/com/banyac/midrive/a/b.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "93EBD0673C6755FC5E07D5B7978F0543C6419858EBE07D63C78902B019EE0F42",
+      "patchedSha256": "1E655D0CB2B4674C4C0B5975648F4581A9E20EA270B11669FBB4F7A9C948E3A2"
+    },
+    {
+      "path": "smali/com/banyac/midrive/base/ui/BaseWebViewActivity$3.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "3910A943718414652FB7054B410833EF6BAC54321170DCE99B64E83E3B698FED",
+      "patchedSha256": "91FEB3354D178AD7F618C8F491632144099E31690723F44F27D182D0A7E29BDD"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/b/d.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "27FC247EA7EFA0CCD575EFFE8C97773481ACC282600E2219213F707F1BC2B221",
+      "patchedSha256": "2C54C771FF9345585B81879F0B67AD28FC35BBCE6743DAF4415A00317F9E307F"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/c/b.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "277A82C3E0EF1265972D532938F4E89E7D6002CB6469ECA20B58B03A0DAA2A1D",
+      "patchedSha256": "CAA34FED69A3ED5224A48D99E7EC37808E54BA9E125C820C109F0141609F2B5B"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/c/c.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "5EEACA1A1F03A16F643E93C1E8AEC66B0BF6F9FD0B63AE4A77BAA29C774D5B5D",
+      "patchedSha256": "E47DDF423AEA02B7CC7D9022646DE0E3E8AAF29B02A239285D3513317608086E"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/AgreementActivity$1$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "B9902F433AE523222EF6621AB8AF5EA1CEA94C88264A1B90B83760B515F91128",
+      "patchedSha256": "16186F79C1BA19D532977DE94CA800027E78E9532579D8CBF4A4D7D17FCC3D50"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/AgreementPrivacyUpgrade.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "D6AF68E0CD9AFBCA589E232D90F0A924F3F04F354606F4CCE32198E958AC0198",
+      "patchedSha256": "B7BB9BE1380E2EBAEA2271D14EC30A964C71940E36F082F3AD0623322F2BDB91"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/login/SplashActivity.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "5D8A276275D2E992878CD9D0B69A25597CE041217E63B099EBB7C57932318FEA",
+      "patchedSha256": "ED622DFC45CCFE4221E4C8120FEF4F2BB2331385D667FB3DF420E3E7BB70440D"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/login/SplashActivity$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "5C2F90E03F7AF8A93B5FF9FDEBC89B0480B6782A471772CBCD365B0041DD78BA",
+      "patchedSha256": "26C3D07FE43A77DAF0E242D36A196337860048CAFFD4DAB3E5741C4E2F04503C"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/MainActivity.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "FEFE710A9467D9CB59FB64303358ED0A2977561EC4B7A65FA0E5E5B37BE97F41",
+      "patchedSha256": "90A6065C443A72257FE1BDC1755F7C72F34258C78B430B93032189DAE0133A56"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/PrivacyActivity$1$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "3F48D6CEA45FB4B50E4EC3C66AA05F20F3C379BF8C3DBB703CA11DE8A5045653",
+      "patchedSha256": "ED75F6F9E5C9A9C1DB7AC963AA67B4CA2DEA1B9F721DE71ACC6D5189BC236810"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/UserCenterActivity.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "6945F7D8B234F1683BCF108CDC218CACB6917972F00CB3A80865165DF6206C34",
+      "patchedSha256": "1CECAE43DC7B3C3AED909DB9C49D7C5F18353617BFC10D987984A50F2AC57F96"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/WebViewActivity.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "EC9679A6C931A3068DD4D7EFF48B194932DE0E8CAAE338CAD229F025647AD814",
+      "patchedSha256": "F4B250F3CBB790E8B8AD4C654D33CE6CF1265DC805D34A7B42FF0C1C949A444A"
+    },
+    {
+      "path": "smali/com/midr/cardvr/b/a/e.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "2CA0A1D345C67DF30663BCD0B945B884B78BF80816E89B6F664DD9B7B2FCF401",
+      "patchedSha256": "EBCD9518D4B04BEB470B000EFF712A94455483E643BD07788BDB0FA7E8023E23"
+    },
+    {
+      "path": "smali/com/midr/cardvr/b/a/g.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "48C4A9F448FC7B64C8715113CEBC41B7D6A0B2079EDA5548EC82FFC17BC9DFBB",
+      "patchedSha256": "2703B0F15A635D831CBEF9DAADCF767C7A5E3FFF8E7E0AF7D6BA98C7803FD825"
+    },
+    {
+      "path": "smali/com/midr/cardvr/b/a/i.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "2FBE02FF893D04D02C947711EFE27AE9C060207B13B24C5A649FECBC8403A936",
+      "patchedSha256": "DC8692914CB977566E8195A8131E2B53D9859DB549DCDF702F3A101C69009EA5"
+    },
+    {
+      "path": "smali/com/midr/cardvr/b/a/j.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "05EF9D9C81A52152855ED618273A98C4E414A2895D04B258E0E4D5905952A5DE",
+      "patchedSha256": "9408B0B131BF91D4969D3D947E06F7A05C5762FAAEE3DC7F2247C295119EE740"
+    },
+    {
+      "path": "smali/com/midr/cardvr/b/a/k.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "56A6EE03E263917B39AE13E2C65D064D6C4B97DF3A850E60611FA5161859E7FB",
+      "patchedSha256": "EB23DA08720DC257DD83E7D1FF189904B4DC68E73CB3F978DFCB26A6E8FAA49C"
+    },
+    {
+      "path": "smali/com/midr/cardvr/b/a/l.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "DE560CEF2DE3A6C7D986F3421B5F02A589F1A55F070FC2AC85BD698EC55DC8BF",
+      "patchedSha256": "C0EF48205078E676229BA641ED1945805C12CCD884A7EA37D6B7CDC6423DA94B"
+    },
+    {
+      "path": "smali/com/midr/cardvr/ui/activity/guide/StepTwoActivity$2.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "AFF3D6C34EB8AD59D48FF33A373D9A711B31E2B54BE21052E4DF07563C9F349C",
+      "patchedSha256": "FAF0BA9D9003E612B8E510022E847C5FD75514711F4C8BB26BC8BE194A16D49D"
+    },
+    {
+      "path": "smali/com/midr/cardvr/ui/activity/MainActivity.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "15983EBCF87EA99474E1935D1B9944B5FF11520821842BEC1A7689474FCB8274",
+      "patchedSha256": "48E1E767AE96680FEF6CD11C34C08AABA953C384E8F18F406C661F5B6CED88EF"
+    },
+    {
+      "path": "smali/com/midr/cardvr/ui/activity/WebViewActivity.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "C4C212527D91118FF86C0242680A44944AD46C0F5A39F9AC7D8873B0ECF3A414",
+      "patchedSha256": "741407863953E68EDD42111A7182342B839989273892A04339AF64B37FC98CD7"
+    },
+    {
+      "path": "smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "6EE280DCA5A001333A4B13036F177113391A02B8EBC48585543054030E3BC49C",
+      "patchedSha256": "5E4A57386F59BD8E9B0DB17B673381AFF762F53B7AB82EA1219506447D7D2344"
+    },
+    {
+      "path": "smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "FF79D5F024FC5770D7AFD12883CDC544CD90054B98AA59F681B4D2283ABAC72E",
+      "patchedSha256": "0AB4E6D94CFDB2F8F3B7378C6D45B1A071ABE219D3EA114DC01C7874B3C3505F"
+    },
+    {
+      "path": "smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$4.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "915B68F3ED56615F1C62A112694331AD557253EDE3B6CD6DC479A83CCA4999F6",
+      "patchedSha256": "1A83119C365A050DBDED64E1960767B5A1D9A424E922021C7D0847C42876A3CE"
+    },
+    {
+      "path": "smali/org/videolan/libvlc/media/VlcRtspStreamPlayerFragment$MyHandler.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "12052DB918810C8BAB832FB0964F22A73C4651DCE392985100C2425DBA8AEAFF",
+      "patchedSha256": "3C00694B9E341348B29138BFD740392A1577CDF55CB28159316C8A5FD82BF131"
+    },
+    {
+      "path": "smali/org/videolan/libvlc/media/VlcVideoViewer.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "555E64DDB221275A643B1397B0A7D9B4AB775A7BE72FD2C82D420A8F71B42CF6",
+      "patchedSha256": "FE5563F1276D53EB7EAE0277DC974B7987B6E07F7804C46D5C108AF97C62841C"
+    },
+    {
+      "path": "smali/org/videolan/libvlc/MediaPlayer.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "9F728FDB45C83296145ABE7020404E4C04CEDE85B0BCB076802958ECBC6DAF5E",
+      "patchedSha256": "AA8D009332898908A90D73AF75E9A132DC161F96A1655A1EB1B3AB47C1191B13"
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "assets/help/faq.html",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "572564068542153D474777145A589D87128273FC3A28CCE393E1C5A61D15120C",
+      "source": "files/assets/help/faq.html"
+    },
+    {
+      "path": "assets/help/installation.html",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "9F779B1F4A4DC4563CAB78BA19B4DB748F2B4CE409D0468C2F4CF507E9023CEC",
+      "source": "files/assets/help/installation.html"
+    },
+    {
+      "path": "assets/help/manual.html",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "6C79A67D8BD6B24C388A5D060D41A9B00DAE73BDF36B9BAB46F338541C794692",
+      "source": "files/assets/help/manual.html"
+    },
+    {
+      "path": "assets/help/style.css",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "AC4504297FAAFF20056CBCD64399EE0DCB7D88B13C0A1D2E2D5D3C0837121C79",
+      "source": "files/assets/help/style.css"
+    },
+    {
+      "path": "assets/help/tips.html",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "67E4F176A6A7E16EB62D7CDF80FE7C9172A0EC1E6851357AF976F2668BA2FC77",
+      "source": "files/assets/help/tips.html"
+    },
+    {
+      "path": "assets/help/wifi.html",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "346CB1DD990C5B42D17CD0B771B2CD6A6B18A11E3D62226998E84CAF5F40067B",
+      "source": "files/assets/help/wifi.html"
+    },
+    {
+      "path": "res/xml/manual_file_paths.xml",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "625D41E84B2E919F40BEE0575B85654D4A2C2222F1F1D2E85101E03BEF395CB6",
+      "source": "files/res/xml/manual_file_paths.xml"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/util/ManualPdfOpener.smali",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "0687D564E88FE91F59E216547358D475B24E5F034B036C595B52033FFF2B63A2",
+      "source": "files/smali/com/banyac/mijia/app/util/ManualPdfOpener.smali"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/util/ManualPdfOpener$$ExternalSyntheticBackport0.smali",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "F12DE1E04973D6F902F1188BEF724439BE555EE50CA70D2E06AF63A4DB73252E",
+      "source": "files/smali/com/banyac/mijia/app/util/ManualPdfOpener$$ExternalSyntheticBackport0.smali"
+    },
+    {
+      "path": "smali/org/videolan/libvlc/MediaPlayer$2.smali",
+      "hashMode": "text-utf8-lf",
+      "patchedSha256": "C6FB45B5BB34588398DF61C6B52477725E19D71335528344F8584DC38A1100F1",
+      "source": "files/smali/org/videolan/libvlc/MediaPlayer$2.smali"
+    }
+  ],
+  "deletedFiles": [
+    {
+      "path": "smali/com/banyac/mijia/app/b/a/a.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "046DFFF0CBFFF7C8C71B759595FC6BB6428C080D748FF01364806AC6424D27EA"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/login/LoginActivity.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "15BC25F2DB0EB27074368B8A6EAC80175DC5A138F5C1502F6D280EF5D9C5DFE6"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/login/LoginActivity$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "877ADA1879FB100A5D65FCCE7793A222B4723EA0B8C542351B54369A4BF1F211"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/login/LoginActivity$1$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "5F0C749F9EEC5F98BF75EF1B4A4613B6555019EA57D203790C1CE461BBBA9B25"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/login/LoginActivity$2.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "6D7BE09EE2675894BE8E1D980A178A25E42C85C84EB94F93BB4EC29C5A1E646B"
+    },
+    {
+      "path": "smali/com/banyac/mijia/app/ui/activity/UserCenterActivity$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "FF5793497931761D70BF174D61EE15ED3BEB196FA2D5F5EE2EF97E49D60B20F2"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/AuthorizeApi.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "6C9C18C6DA91BC5407059A754DD1133D8FAAD6C897423DAAC7E34930454B85C2"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/AuthorizeHelper.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "8722C46DC7613BC9DABAB532447A554DD2CB5F03E892D5ECA55B960385D4C239"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/AuthorizeHelper$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "D49E843B1E714ADFD4527FF40B89FEE22B0E10A2AB474AC34EFC2C26828F8F3C"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/MiuiAuthServiceRunnable.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "08564B0F1E4D56E2D1CE6CFE3D15170AED56D424EC5C56C7DDDAFAE418F9C653"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/MiuiAuthServiceRunnable$NoMiuiAuthServiceException.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "EDE9C6A0D6BED55C82F7EBFE6F6EB9E80516B976C03DB73D1F57827F0BF39DE1"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/MiuiOauth.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "359C402D35B629A7921AE55A4C1555BAC52A31294F90FB548C3914768F9FAB4B"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/MiuiOauth$MiuiOAuthSession.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "6E0E99D78674F86ADADBC426764620F515A01D03075E2AD9CE8CB213B20EC868"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/MiuiOauth$MiuiOAuthSession$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "03352EC464FF8620EEDB0A58656DAD6E8DFDEA22E563518F94D4C777EB2D7D58"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/MiuiOauth$MiuiOAuthSession$2.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "08D4565F534A8456D24CB96A516C5728F593C3F31FE8B1456CA0A153CF487388"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/MiuiOauth$MiuiOAuthSession$3.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "AE7FE92BCFEE30F9AA2488DE26090E1A4E7AB42AB0936012E9EA21B3CBF53843"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/OAuthConfig.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "A1B7C5092559331563F3EAEA6E7A8C37EEF624C0357DF8D1EC1651E8EF610B38"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/OAuthConfig$Builder.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "26EEC75861D40BC1E87C9C800FCB54984DF8071697D35D4C25B66DD97A77F1EB"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/OAuthFactory.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "28B9E65A641652A876654B4AFBD253E6C9431A0D5BEA029F68080B48C4664D6A"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/OAuthServiceManager.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "0839D4B0FAAD59709A1ADD43C8DEC05DEB57CE482A9A3A39083F7199F087854A"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/OrderApp.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "AD4923ADBB8E3B30411817C4D2F82FE90E45102CC0588CF1E072609F82892628"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/PhoneInfo.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "C045E68EF3213DA7C74022110B3C1E165C3D9EAB5946FCE2C52269C6259C683E"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/WebViewOauth.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "7549F3DD08199A61E1968FA21AF45DC68FF83A4480EAFEF75774E19DCE00A03C"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/WebViewOauth$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "C5148365465CDBCD1B4BB110F5272626737CD813571D251A5E93579BDE91C4F8"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/XiaomiAuthService.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "9134E04787F2E745038CDE0AF6F898C645114A2601BD23DC4C3A26B985DE1D23"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/XiaomiOAuth.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "520626E2BDF16B1802A9B2484687649BB1DDB98BBBBD6CF494A9125379390764"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/XiaomiOAuthFutureImpl.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "91168646386244302BFFCE6F59673786F45593E3047C15C6DE8BC4680F3665EC"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/XiaomiOAuthFutureImpl$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "D0234594E88439D33B18EC6928EB64A9D82AD7FC50117A30255E8F8FDDF04859"
+    },
+    {
+      "path": "smali/com/xiaomi/account/auth/XiaomiOAuthRunnable.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "1194136AF69C0EE3B867F4A76D0733312DB38D39C6F871A7B5A15287E9B661B7"
+    },
+    {
+      "path": "smali/com/xiaomi/account/BuildConfig.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "EC80E235C577FE4B6CB7F9D92362D1C47254B780ED38456C7D46CB40E272DFF4"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/HttpClient.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "9AECA5EAE5464673AAFF261FE4C71FFBFB209529D43435380B1D55D8269EF506"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/HttpClientConfig.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "3C12001B8FEAB20888EF137D79B6AFFBF8515A1D33F9145037284055972CA78A"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/HttpClientConfig$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "31B7E5078C17AF46761F07EEC44C0E65D2A5F99B606C0627503FA6FD9ABD0F30"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/HttpClientConfig$Builder.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "4BC435A7EB9AA1228071A21EDA312438D87BB3851D3DDE7EF0151BD21B906C2E"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/HttpFactory.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "C8B98CFE6BFE59FB5C477C82D8BDC2E612B610FD21C5BFF5125AA69C2A4EEEE3"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/Request.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "A101353052DEBBABD8A45A162F3CBC9C4C37A9A9AC7127FA7A2A96BDE92BEF2A"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/Request$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "5BD363A338644EABD89E941487F41E05DB66A78BF6750FDFEF7276F808E806B4"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/Request$Builder.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "D98867F166F3E7A7AE30D7DB7994B5B0F00D30294C98357A5848034F17F30DF7"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/Response.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "B9A98A2DC11D2BF7067C204BEE7B4CE22B04A95BCD04DF22202B4622EAB88781"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/Response$Builder.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "354DEB508EBC1533A7FBDBC21096E28A7E4ACCE4194F71A43AB02C0F3E9997F9"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/UrlConnHttpFactory.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "11D20132155D1384B9D368BE366C4E1E6F7D6A6C8BC138D0443714539A1F051B"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/UrlConnHttpFactory$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "4AEDA0003DB3F6BB66A2C5DC9F4796F85ED6E5244A26415E2DD27AD7D7EDD8E0"
+    },
+    {
+      "path": "smali/com/xiaomi/account/http/UrlConnHttpFactory$HttpUrlConnClient.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "6F5220BA60F82374C33313840D4E581605348FCA43F155D3C8F08D2899C422F6"
+    },
+    {
+      "path": "smali/com/xiaomi/account/IXiaomiAuthResponse.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "A6AB04A490C1287156A0E70BCEFF28AAA85F4A922AE761D9749319CC89EA6C81"
+    },
+    {
+      "path": "smali/com/xiaomi/account/IXiaomiAuthResponse$Stub.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "7E22D34D6EB3490BA0EC140A876352A79A40339A9E3E982204F56265BE065A20"
+    },
+    {
+      "path": "smali/com/xiaomi/account/IXiaomiAuthResponse$Stub$Proxy.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "43A1AEDE366E5351B6EC67D0B2D4F1C950835007A7E24EBF2B4489C02EEF09CC"
+    },
+    {
+      "path": "smali/com/xiaomi/account/IXiaomiAuthService.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "E5E0F689EC59E02D33FC90C9C6726076BF165BECED8BC7F829EACF41197FEE38"
+    },
+    {
+      "path": "smali/com/xiaomi/account/IXiaomiAuthService$Stub.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "17C44B0BDAC642C46D48A38FB4F0CF28B2AE1907B45B09604658A6961B24F188"
+    },
+    {
+      "path": "smali/com/xiaomi/account/IXiaomiAuthService$Stub$Proxy.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "AA1D70347D43F34097476FE80C15D7F66CEBDCAD3DCE54E642B78CB8E8DF9542"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/AccountAuth.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "5B09C2AB5FB93D8C08D38BF0CBFCC07B7CB44BCDF8838D6E2837532ECB345F34"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/AuthorizeActivity.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "61BECA5AF3464B8908EF082A04B56D9DCC4B1C85A88157D317931CB621183F98"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/AuthorizeActivity$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "710923640724887C564EE75AEE276D0E54F7321AA0C2A8EAFC82639BBBF7D27B"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/AuthorizeActivityBase.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "A1E4313F1981D746904FCB8ED3817141D6EB63704340CD5EEAC4BA1FB2BDBBB5"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/AuthorizeActivityBase$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "70A5A3936E3BDA95974CA81F1A7AD8A68F954EA7AFCAD8FCD1D4558FF33AA646"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/AuthorizeActivityBase$2.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "B8A2BA9408A3B7142F1B7B551C985D0C81836641A3B915D2716C2AABC50CBBE4"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/AuthorizeActivityBase$AuthorizeWebViewClient.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "047C9A91212212D247F71EF009511F26F66FF180ABA141117B517870CC94C420"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/internal/MiAccountPhoneInfo.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "EFC1B863CAC137F2EDCE34F86D8151C9E4DE912F008B891C5005E83C895577AA"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/internal/MiAccountPhoneInfo$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "60DBA7940C09E5D0CCD1AD4D92BD464F3312B4E9083F8350C31EDE1E79BF3D7A"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthConstants.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "82DC3134B5598FE29C87D3FAB8EFE1BBD5D22F4F19314EBB8F1011B942B28D58"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthFuture.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "2A171A8A3B39C46B2EE624CD29A0D692438668D2994369920E24BCB8B320455D"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthorize.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "06F6EAA3C0FA59CE2405C4083500E7A963FCCE224EE2B14769CAEFAB9255437A"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthorize$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "A7515BADD1157376EF827739CB211683EDED7FE11227A962D617E185CE46BF12"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthorize$2.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "150CFB069D9D2A92B2BB9D54B9EC12DFCADAD9F833096D063AF249FD2DC5EB3D"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthorize$3.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "CDBDC1F75DBF13D78919DF3D310AA85728802F6CE3DF1DF6B0FA5D481FC20940"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthorize$4.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "405DF11BCF4876248893DC9A01018B159C211ED8406143397D9D4C2EB0632A52"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthResults.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "0BFE5424F3AE43735B8446B95DCA0E7FD030004C2F36ADB583AB27544D6DCA7C"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthResults$Error.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "D3F395A92FB2B7B2DEBC7075CDE1FC115D659B285062AA76FC26C68D2CAF0496"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XiaomiOAuthResults$Success.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "F08070851EB6AF4F53D7A146A87108890AEDDA4BCF103B30FFBE0AFA8368A1EA"
+    },
+    {
+      "path": "smali/com/xiaomi/account/openauth/XMAuthericationException.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "F2F67F8BE0A55E1AC0C7892906EAE41636E5427EE7F3E815F57133991C5A2408"
+    },
+    {
+      "path": "smali/com/xiaomi/account/utils/Base64Coder.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "4D1887AA290F989B220E8B21DBDB78CD5C21FE2D3426508F6B837C84195CCC27"
+    },
+    {
+      "path": "smali/com/xiaomi/account/utils/OAuthUrlPaser.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "ED134AFF67F2F26CE9EF6F1616027D3754DB10F8AAD4BA2E943D32805776E741"
+    },
+    {
+      "path": "smali/com/xiaomi/account/utils/ParcelableAttackGuardian.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "D26EC09518E93EEF5A66E6819E6BCB330881D5277ECB0DA4E1B461F94EF5492C"
+    },
+    {
+      "path": "smali/com/xiaomi/account/XiaomiOAuthResponse.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "786E965E3CCC85518850ECCEEEC24178F031322CE758000DDF11EA6ED117C961"
+    },
+    {
+      "path": "smali/com/xiaomi/account/XiaomiOAuthResponse$1.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "26E7D2B7F4A7C8E55F85E30095522E601A16AAADD0D90F0141907C05D3603018"
+    },
+    {
+      "path": "smali/miui/net/IXiaomiAuthService.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "2BAA17BB200316476544F5D3B686D88AC06E0FC0D264D10A9CADEA74FBC6A71A"
+    },
+    {
+      "path": "smali/miui/net/IXiaomiAuthService$Stub.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "986B5273AA0AF49A16B2FE1D035EAFF6A24E914E0B9DA6BB55A96E717DABE199"
+    },
+    {
+      "path": "smali/miui/net/IXiaomiAuthService$Stub$Proxy.smali",
+      "hashMode": "text-utf8-lf",
+      "originalSha256": "970CDDE8953B56D32AFA46E060BECEE55621E937F840BBDAB400DEEE2EB38270"
+    }
+  ],
+  "vendorInputs": [
+    {
+      "inputPath": "vendor-input/arm64-v8a/libanw.21.so",
+      "targetPath": "lib/arm64-v8a/libanw.21.so",
+      "sha256": "842B6073E4CCC0C27D1E5E88B8824B5DFCA0B38ECAB4D0F01B3B0558D6CD93E8",
+      "size": 9712,
+      "category": "native-library",
+      "requiredForCompleteBuild": true,
+      "provenance": "mrmaffen/vlc-android-sdk tag 1.9.8, commit caaa6cfd9a2e2ca0d951103a06a89417336606a1",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/arm64-v8a/libcompat.7.so",
+      "targetPath": "lib/arm64-v8a/libcompat.7.so",
+      "sha256": "BDCE82A39D4B3AD7596FF2622AEEC8D83386C3AC8C42C11ADEE2DF438413089C",
+      "size": 5544,
+      "category": "native-library",
+      "requiredForCompleteBuild": true,
+      "provenance": "mrmaffen/vlc-android-sdk tag 1.9.8, commit caaa6cfd9a2e2ca0d951103a06a89417336606a1",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/arm64-v8a/libijkffmpeg.so",
+      "targetPath": "lib/arm64-v8a/libijkffmpeg.so",
+      "sha256": "40AAE11DDB24E4760BBE2DA279DA93C7F3F97A7876B268AE5E384CF31EF75DBF",
+      "size": 2423256,
+      "category": "native-library",
+      "requiredForCompleteBuild": true,
+      "provenance": "IJKPlayer 0.7.5-compatible local AAR; exact upstream build chain is not established",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/arm64-v8a/libijkplayer.so",
+      "targetPath": "lib/arm64-v8a/libijkplayer.so",
+      "sha256": "A037452BCA64DE525C3D42AF1AE895C8A44F83E51720DE559E1390C45C8FA3C5",
+      "size": 187832,
+      "category": "native-library",
+      "requiredForCompleteBuild": true,
+      "provenance": "IJKPlayer 0.7.5-compatible local AAR; exact upstream build chain is not established",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/arm64-v8a/libijksdl.so",
+      "targetPath": "lib/arm64-v8a/libijksdl.so",
+      "sha256": "B08DDD83E61A2788EA1D3BD01E1D90FE2169BC04CDE8E966CBAA2C84C3D54A43",
+      "size": 472920,
+      "category": "native-library",
+      "requiredForCompleteBuild": true,
+      "provenance": "IJKPlayer 0.7.5-compatible local AAR; exact upstream build chain is not established",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/arm64-v8a/libvlc.so",
+      "targetPath": "lib/arm64-v8a/libvlc.so",
+      "sha256": "195D2F49BAF16629D352889DE3E633C7B34A26CD699EF9C788109A0BE474C98A",
+      "size": 26349920,
+      "category": "native-library",
+      "requiredForCompleteBuild": true,
+      "provenance": "mrmaffen/vlc-android-sdk tag 1.9.8, commit caaa6cfd9a2e2ca0d951103a06a89417336606a1",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/arm64-v8a/libvlcjni.so",
+      "targetPath": "lib/arm64-v8a/libvlcjni.so",
+      "sha256": "A3F78ADBC954825DB5B55AA7D91F84960C2A552C09512AF6E542EB12F332FCF9",
+      "size": 67136,
+      "category": "native-library",
+      "requiredForCompleteBuild": true,
+      "provenance": "mrmaffen/vlc-android-sdk tag 1.9.8, commit caaa6cfd9a2e2ca0d951103a06a89417336606a1",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/manuals/manual-mjxcjly01by-en-landscape.pdf",
+      "targetPath": "assets/help/manuals/manual-mjxcjly01by-en-landscape.pdf",
+      "sha256": "4BCAD89F3EAF684FAC29A88147D18B4CB3AEA6761C814706ADF34DE91E42F4A2",
+      "size": 3069267,
+      "category": "manual",
+      "requiredForCompleteBuild": true,
+      "provenance": "Local manual input; see source-kit documentation",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/manuals/manual-mjxcjly01by-en-phone.pdf",
+      "targetPath": "assets/help/manuals/manual-mjxcjly01by-en-phone.pdf",
+      "sha256": "D3E2228A8292C10E79AB5A0B5871C8D6F6E4A0EF6C74695246011B012B467AB3",
+      "size": 3069314,
+      "category": "manual",
+      "requiredForCompleteBuild": true,
+      "provenance": "Local manual input; see source-kit documentation",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/manuals/manual-mjxcjly01by-ru-original.pdf",
+      "targetPath": "assets/help/manuals/manual-mjxcjly01by-ru-original.pdf",
+      "sha256": "207AEDD8373F0F32F3ACB195291D6D61F47B1C0EDF7C051E70EE58925E2C469D",
+      "size": 1045711,
+      "category": "manual",
+      "requiredForCompleteBuild": true,
+      "provenance": "Local manual input; see source-kit documentation",
+      "redistributionStatus": "local-input-only"
+    },
+    {
+      "inputPath": "vendor-input/manuals/manual-mjxcjly01by-ru-phone.pdf",
+      "targetPath": "assets/help/manuals/manual-mjxcjly01by-ru-phone.pdf",
+      "sha256": "BCBB05DBD956F588E6218D945509AA145C5E79069B5A77AA410F174263AB4E34",
+      "size": 1007462,
+      "category": "manual",
+      "requiredForCompleteBuild": true,
+      "provenance": "Local manual input; see source-kit documentation",
+      "redistributionStatus": "local-input-only"
+    }
+  ],
+  "expected": {
+    "versionCode": "20000",
+    "versionName": "2.0.0",
+    "minSdkVersion": "15",
+    "targetSdkVersion": "28",
+    "abis": [
+      "armeabi-v7a",
+      "arm64-v8a"
+    ]
+  },
+  "referenceRelease": {
+    "apkSha256": "2F189C0D3A6C9965036EDDBFA927EB7FD720C47D611991EB5EC1D1055E89B887",
+    "signingCertificateSha256": "BE7E580BAE6723900DD30952B1DF215B282B445BCADAFC621C03B8D9CF81A1BD",
+    "note": "Reference identity only. A local rebuild is not promised to be byte-for-byte identical."
+  },
+  "toolchainReference": {
+    "apktoolJarSha256": "DBF930B076C6B9BE08D57C449CACEFC3BDD6B71EBD59B3066FC0E1F5B14F9423",
+    "java": "OpenJDK 21.0.11",
+    "androidBuildTools": "35.0.0"
+  }
+}

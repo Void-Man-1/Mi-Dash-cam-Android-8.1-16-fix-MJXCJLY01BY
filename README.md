@@ -33,7 +33,7 @@ Version 2.0.0 works locally without a Mi account and restores the phone features
 
 The app has been checked on real phones running Android 8.1, 9, 12, and 16, with additional Android 13–15 testing described below. A complete camera test on a Poco F6 confirmed live view, recordings, download, and playback with the earlier 1.1.9 build. Before 2.0.0 is published, it still needs one final real-camera test focused on leaving the camera and connecting to it again several times.
 
-This repository contains the explanation, screenshots, checksums, and test results. The patched app will be added to GitHub Releases after that final test passes.
+This repository contains the explanation, screenshots, checksums, and test results. Developers can review, reproduce, and improve the compatibility work through the [patch source kit](source-kit/README.md) without redistributing the complete decompiled Xiaomi/70mai application. The patched app will be added to GitHub Releases after that final test passes.
 
 The patched app provides:
 
@@ -305,6 +305,7 @@ The new key must be retained securely and used for every future 2.0.0+ release. 
 - [Historical release 1.1.9 notes](docs/RELEASE_NOTES_1.1.9.md)
 - [Repository listing metadata](docs/GITHUB_LISTING.md)
 - [Publishing checklist](docs/PUBLISHING_CHECKLIST.md)
+- [Reproducible patch source kit](source-kit/README.md)
 - [Contributing and useful bug reports](CONTRIBUTING.md)
 - [Legal and attribution notice](NOTICE.md)
 - [Release checksum](checksums/SHA256SUMS.txt)

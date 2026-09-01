@@ -1,0 +1,23 @@
+# Proprietary/local inputs and generated workspaces
+/input/
+/vendor-input/*
+!/vendor-input/README.md
+/work/
+/build/
+/tools/
+
+# Binaries, signing material, and device evidence
+*.apk
+*.idsig
+*.p12
+*.pfx
+*.p8
+*.pk8
+*.pkcs8
+*.jks
+*.keystore
+*.pem
+*.key
+*.pcap
+*.pcapng
+*.log
