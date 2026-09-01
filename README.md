@@ -2,7 +2,7 @@
   <img src="assets/app-icon.png" width="132" height="132" alt="Mi Dash Cam application icon">
 </p>
 
-<h1 align="center">Mi Dash cam Android 12-16 fix<br><code>MJXCJLY01BY</code></h1>
+<h1 align="center">Mi Dash cam Android 8.1-16 fix<br><code>MJXCJLY01BY</code></h1>
 
 <p align="center">
   Restores the European Mi Dash Cam app on modern Android, including Poco F6 with Android 16 / HyperOS 3.
@@ -13,7 +13,7 @@
   <img alt="2.0.0 release candidate" src="https://img.shields.io/badge/status-release%20candidate-f59e0b">
   <img alt="Model MJXCJLY01BY" src="https://img.shields.io/badge/model-MJXCJLY01BY-555555">
   <img alt="EU region" src="https://img.shields.io/badge/region-EU-2563eb">
-  <img alt="Android 12, 13, 14, 15 and 16 tested" src="https://img.shields.io/badge/tested-Android%2012%20%7C%2013%20%7C%2014%20%7C%2015%20%7C%2016-3ddc84">
+  <img alt="Android 8.1, 9, and 12 through 16 tested" src="https://img.shields.io/badge/tested-Android%208.1%20%7C%209%20%7C%2012--16-3ddc84">
   <img alt="1.1.9 Poco F6 hardware accepted" src="https://img.shields.io/badge/1.1.9%20baseline-hardware%20accepted-ff6900">
 </p>
 
@@ -27,11 +27,13 @@
 
 ## What is this?
 
-This repository keeps the Xiaomi Mi Dash Cam `MJXCJLY01BY` useful on current Android phones. It contains a repaired European `Mi Dash Cam` APK, its checksum, screenshots, test results, and a detailed explanation of the work.
+This is an unofficial community fix for the European Xiaomi Mi Dash Cam `MJXCJLY01BY`. The camera still works, but its original phone app was abandoned: it crashes on newer phones, parts of it lead to dead web pages, and the current Mi Home app does not provide a working replacement for this model.
 
-The current generation is 2.0.0. It completes removal of the obsolete Mi-account code and hardens the path used when connecting to the camera again. The exact release-signed candidate has passed static, cryptographic, and clean-install checks; it remains a release candidate until it passes repeated physical connect, leave, and reconnect cycles with the real dashcam. Version 1.1.9 is retained as the historical hardware-accepted baseline; its complete Poco F6 / Android 16 camera test passed connection, live preview, recording list, download, and replay.
+Version 2.0.0 makes the old app useful again. It opens without a Mi account and restores the main features needed to use the camera from a phone. Instead of throwing away working hardware, owners can connect to it locally and keep using what they already bought.
 
-This is a compatibility patch around the surviving binary, not a source-code rewrite: Xiaomi's original source code is not available. Git history contains the documentation, checksums, and reviewed screenshots; the patched APK is distributed separately through GitHub Releases. Xiaomi's untouched APK, the private decompilation workspace, signing key, and device/account data are not published.
+The app has been checked on real phones running Android 8.1, 9, 12, and 16, with additional Android 13–15 testing described below. A complete camera test on a Poco F6 confirmed live view, recordings, download, and playback with the earlier 1.1.9 build. Before 2.0.0 is published, it still needs one final real-camera test focused on leaving the camera and connecting to it again several times.
+
+This repository contains the explanation, screenshots, checksums, and test results. The patched app will be added to GitHub Releases after that final test passes.
 
 The camera itself still records good video. The problem was its old phone app. This patch brings back the everyday features the hardware was sold with:
 
@@ -100,13 +102,15 @@ In plain language:
 
 | Android | Status | Verified on |
 |---|---|---|
+| Android 8.1 | Exact 2.0.0 clean install and physical app/UI regression verified; camera hardware not tested | FUJITSU F-01L, API 27 |
+| Android 9 | Exact 2.0.0 clean install and physical app/UI regression verified; camera hardware not tested | SHARP AQUOS sense2 (`SH-01L`), API 28 |
+| Android 10–11 | Not tested | No support claim yet |
 | Android 12 | Exact 2.0.0 clean install and app/UI verified; camera/media baseline verified on 1.1.9 | Samsung Galaxy Note10+ (`SM-N975F`), One UI 4.1 |
 | Android 13 | App/UI supported and verified on the 1.1.9 baseline | BlueStacks 5 Android 13 Beta, API 33 (`Tiramisu64`) |
 | Android 14 | App/UI supported and physically verified on the 1.1.9 baseline | Samsung Galaxy S24 (`SM-S921U`) and S24 Ultra (`SM-S928U1`), API 34 |
 | Android 15 | 2.0.0 debug-candidate replacement and clean-data smoke verified; 1.1.9 baseline verified | MuMu Player, API 35 |
 | Android 16 | Exact 2.0.0 clean install and app/UI verified; camera/media baseline verified on 1.1.9 | Redmi 13C (`24040RN64Y`), HyperOS `3.0.4.0.WNTEUXM` |
 | Android 16 | 1.1.9 baseline fully hardware accepted | Poco F6, HyperOS `3.0.303.0.WNPEUXM.C07` |
-| Android 11 and older | Not support-claimed | The APK may install, but this project has not tested it |
 
 A complete physical test was conducted with the exact 1.1.9 APK and the EU `MJXCJLY01BY` connected to the Poco F6. Startup, camera connection, live preview, sustained responsiveness, recording list and thumbnails, download, and replay all passed. This proves the inherited camera/media baseline; the 2.0.0 reconnect delta still needs its own repeated-session camera test.
 
@@ -114,9 +118,13 @@ On BlueStacks Android 13, the exact APK installed with its ARM64 libraries, cold
 
 On two physical Android Device Streaming phones running Samsung Android 14/API 34, the exact APK clean-installed as ARM64, cold-launched, showed `Offline account` / `No Mi account connected`, rendered all four local help/manual sections, handed a bundled PDF to Android's resolver, and opened the Add-camera hotspot guide. Android exit history and event logs contained no crash or ANR. Because these phones are hosted remotely in Google's device lab, they cannot join the dashcam's local Wi-Fi and do not replace the Poco F6 camera/live-preview acceptance test.
 
+The exact release-signed 2.0.0 APK was clean-installed on a physical FUJITSU F-01L running Android 8.1/API 27 and a physical SHARP AQUOS sense2 SH-01L running Android 9/API 28 through Android Device Streaming. Both selected the bundled `arm64-v8a` libraries and passed the main screen, `Offline account`, Add camera, Tips, Installation, User manual, FAQ, all four bundled manual entries, and two additional cold relaunches. Android 8.1 rendered the selected PDF; Android 9 handed it to Android and displayed the PDF application chooser. Captured diagnostics contained no app crash, ANR, or Xiaomi-account authentication signal.
+
+Those remotely hosted phones cannot join the `MJXCJLY01BY` local Wi-Fi. They did not test camera connection, live preview, recording access, download, or replay and are not camera-hardware acceptance tests.
+
 ## Download and install
 
-Version 2.0.0 is not ready for public download yet. The exact release-signed file is complete and verified, but publication remains blocked on recurrent-reconnect hardware acceptance. Do not install an unsigned or debug candidate. `Mi-Dash-Cam-EU-2.0.0-android12-16-arm64.apk` will appear on the repository's [GitHub Releases page](https://github.com/Void-Man-1/Mi-Dash-cam-Android-12-16-fix-MJXCJLY01BY/releases/latest) only after that final physical test passes.
+Version 2.0.0 is not ready for public download yet. The exact release-signed file is complete and verified, but publication remains blocked on recurrent-reconnect hardware acceptance. Do not install an unsigned or debug candidate. `Mi-Dash-Cam-EU-2.0.0-android12-16-arm64.apk` will appear on the repository's [GitHub Releases page](https://github.com/Void-Man-1/Mi-Dash-cam-Android-8.1-16-fix-MJXCJLY01BY/releases/latest) only after that final physical test passes.
 
 When the release is published:
 
@@ -164,6 +172,18 @@ Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app
 </p>
 
 <p align="center"><em>Historical 1.1.9 baseline: physical Galaxy S24/S24 Ultra Android 14/API-34 regression pass via Android Device Streaming.</em></p>
+
+<p align="center">
+  <img src="assets/screenshots/fujitsu-f-01l-android8-main.png" width="230" alt="Mi Dash Cam 2.0.0 main screen on a physical FUJITSU F-01L running Android 8.1">
+  &nbsp;
+  <img src="assets/screenshots/fujitsu-f-01l-android8-manual-pdf.png" width="230" alt="Bundled MJXCJLY01BY English manual rendered on a physical FUJITSU F-01L running Android 8.1">
+  &nbsp;
+  <img src="assets/screenshots/sharp-sh-01l-android9-offline-account.png" width="230" alt="Offline account screen on a physical SHARP AQUOS sense2 SH-01L running Android 9">
+  &nbsp;
+  <img src="assets/screenshots/sharp-sh-01l-android9-pdf-handoff.png" width="230" alt="Bundled manual handed to the Android PDF chooser on a physical SHARP AQUOS sense2 SH-01L running Android 9">
+</p>
+
+<p align="center"><em>Exact 2.0.0 candidate: physical Android 8.1/API-27 and Android 9/API-28 app/UI regression pass via Android Device Streaming.</em></p>
 
 # Technical details
 
@@ -249,7 +269,7 @@ The exact signed 1.1.9 baseline passed:
 - visible RTSP/RTP-JPEG live preview without the old repeated UI freeze;
 - a fresh-install packet capture with no Mi/Xiaomi account authentication traffic.
 
-The exact release-signed 2.0.0 candidate additionally passes v1/v2/v3 signature verification, 16 KiB ZIP/ELF alignment, a clean signed-APK decode and unsigned rebuild, exact `20000` / `2.0.0` identity checks, executable account-path and sensitive-data scans, structural reconnect-policy checks, and structural confirmation of the asynchronous VLC stop backport. Clean installs on the physical Android 12 and Android 16 phones reached the 2.0.0 main screen, Offline account, Add camera, every local help/manual route, and bundled PDF handoff with zero captured fatal exceptions or ANRs. Android 15 MuMu debug-candidate replacement and clean-data smoke tests also passed; that same-debug-key replacement does not establish upgrade compatibility with Xiaomi's stock app or community 1.1.x builds.
+The exact release-signed 2.0.0 candidate additionally passes v1/v2/v3 signature verification, 16 KiB ZIP/ELF alignment, a clean signed-APK decode and unsigned rebuild, exact `20000` / `2.0.0` identity checks, executable account-path and sensitive-data scans, structural reconnect-policy checks, and structural confirmation of the asynchronous VLC stop backport. Clean installs on physical Android 8.1, 9, 12, and 16 phones reached the 2.0.0 main screen, Offline account, Add camera, every local help/manual route, and bundled PDF handoff with zero captured fatal exceptions or ANRs. The Android 8.1 and Android 9 phones also passed two additional cold relaunches and produced zero captured Xiaomi-authentication signals. Android 15 MuMu debug-candidate replacement and clean-data smoke tests also passed; that same-debug-key replacement does not establish upgrade compatibility with Xiaomi's stock app or community 1.1.x builds.
 
 Repeated real-camera reconnect cycles, followed by live preview, recording list, download, and replay checks after reconnecting, are the remaining release gate. See the [2.0.0 verification report](docs/TEST_REPORT_2.0.0.md) for the exact boundary between completed and pending checks.
 
@@ -271,7 +291,8 @@ The new key must be retained securely and used for every future 2.0.0+ release. 
 ## Known limitations
 
 - Only the Xiaomi Mi Dash Cam `MJXCJLY01BY` EU variant is supported. Mi Dash Cam 1S `MJXCJLY02BY` and other 70mai/Xiaomi cameras are not claimed compatible.
-- Android 13 is emulator-verified but has not received a physical-device/camera-network pass. Android 14 has a physical-device app/UI pass, but its remotely hosted phones cannot access the local dashcam Wi-Fi.
+- Android 10 and 11 are untested. Android 13 is emulator-verified but has not received a physical-device/camera-network pass.
+- Android 8.1, 9, and 14 have physical-device app/UI passes, but their remotely hosted phones could not access the local dashcam Wi-Fi. Camera behavior on those Android versions remains unverified.
 - The preserved firmware-update backend may no longer be available.
 - This is a compatibility patch around a legacy application, not a modern rewrite or a Google Play submission.
 

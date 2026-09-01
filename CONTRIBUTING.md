@@ -26,7 +26,7 @@ The Poco F6 / Android 16 / HyperOS 3 real-camera acceptance pass is complete for
 2. a physical Android 13 result and a local-camera/Wi-Fi Android 14 result;
 3. results from additional MJXCJLY01BY firmware revisions;
 4. long-duration preview and repeated disconnect/reconnect stress testing;
-5. regression reports from other Android 12, 15, and 16 manufacturers.
+5. physical Android 10 and 11 results, plus reports from additional Android 8.1, 9, 12, 15, and 16 manufacturers.
 
 ## Changes
 

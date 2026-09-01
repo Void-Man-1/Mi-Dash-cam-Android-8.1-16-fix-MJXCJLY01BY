@@ -8,7 +8,7 @@
 
 ## Result at this checkpoint
 
-The exact release-signed 2.0.0 candidate passes cryptographic verification, 16 KiB ZIP/ELF alignment, a fresh decode and unsigned rebuild, package/version checks, account-path and sensitive-data scans, and structural checks for the recurrent-connection hardening. Clean installs on the physical Android 12 and Android 16 phones also pass startup, Offline account, Add camera, every local help/manual page, and bundled PDF handoff with no captured crash or ANR.
+The exact release-signed 2.0.0 candidate passes cryptographic verification, 16 KiB ZIP/ELF alignment, a fresh decode and unsigned rebuild, package/version checks, account-path and sensitive-data scans, and structural checks for the recurrent-connection hardening. Clean installs on physical Android 8.1, 9, 12, and 16 phones also pass startup, Offline account, Add camera, every local help/manual page, and bundled PDF handoff with no captured crash or ANR. The Android 8.1 and Android 9 phones additionally passed two cold relaunch cycles and produced no captured Xiaomi-account authentication signal.
 
 This is not yet final hardware acceptance. The exact APK and signing-certificate hashes are recorded below, but the recurrent connection fix still requires a real-camera test consisting of repeated connect, leave, and reconnect cycles followed by media checks after reconnecting.
 
@@ -116,6 +116,37 @@ The exact signed candidate was clean-installed after removing the historical 1.1
 - the English phone-friendly link handed the bundled PDF to Android and opened it successfully;
 - captured fatal exceptions: 0;
 - captured ANRs: 0.
+
+## Physical Android 8.1 and Android 9 clean-install smoke
+
+The exact release-signed APK also passed its offline phone-side checks on two older physical phones supplied through Android Device Streaming:
+
+| Device | Android | API | Selected ABI | Result |
+|---|---:|---:|---|---|
+| FUJITSU F-01L | 8.1.0 | 27 | `arm64-v8a` | Passed |
+| SHARP AQUOS sense2 (`SH-01L`) | 9 | 28 | `arm64-v8a` | Passed |
+
+On both phones:
+
+- the exact APK SHA-256 matched `2F189C0D3A6C9965036EDDBFA927EB7FD720C47D611991EB5EC1D1055E89B887`;
+- Package Manager reported `versionCode 20000`, `versionName 2.0.0`, `minSdk 15`, and `targetSdk 28`;
+- clean installation and the initial cold launch passed;
+- the main screen displayed `Patched by Void__Man`, `Version: 2.0.0`, and the separate unchanged Firmware update row without an obsolete application-update prompt;
+- Account displayed `Offline account` and `No Mi account connected`;
+- Add camera opened the `Turn on Wi-Fi hotspot` guide;
+- Tips, Installation, User manual, and FAQ rendered bundled offline content;
+- the manual library displayed all four bundled PDF choices;
+- two additional force-stop/cold-launch cycles returned to the main screen;
+- captured app crashes: 0;
+- captured ANR events: 0;
+- captured Xiaomi-account authentication signals: 0.
+
+PDF behavior differed only after the app handed the bundled file to Android:
+
+- Android 8.1/API 27 opened and rendered the selected English phone-friendly PDF;
+- Android 9/API 28 displayed Android's application chooser for the selected PDF.
+
+Android Device Streaming phones cannot join the `MJXCJLY01BY` local Wi-Fi. Camera connection, live preview, recording enumeration, download, replay, and recurrent camera-session behavior were not tested on these two phones. These results are physical app/UI regression evidence, not camera-hardware acceptance.
 
 ## Remaining final-release gates
 

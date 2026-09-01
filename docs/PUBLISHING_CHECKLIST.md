@@ -30,6 +30,7 @@ Version 2.0.0 starts a new signing lineage. It cannot upgrade over Xiaomi's stoc
 - [x] Verify APK signatures v1/v2/v3 and 16 KiB ZIP/ELF alignment.
 - [x] Decode the signed APK again and confirm the account-code removal, recurrent-connection policies, asynchronous VLC native-stop worker, offline manuals, and intended manifest.
 - [x] Save any needed data, uninstall the stock or community 1.1.x app from the available physical Android 12 and Android 16 test phones, then clean-install the final signed APK and smoke-test startup, Offline account, local help/manuals, and Add camera.
+- [x] Clean-install the exact signed APK on physical Android 8.1/API 27 and Android 9/API 28 phones; verify startup, Offline account, Add camera, all local help/manual routes, PDF handoff, two cold relaunches, and zero captured crash/ANR/auth signals.
 - [ ] With the physical EU `MJXCJLY01BY`, complete multiple connect, leave/disconnect, and reconnect cycles; confirm live preview after each connection.
 - [ ] After reconnecting, confirm recording list/thumbnails, download, and replay.
 - [ ] Confirm no fatal exception, ANR, long UI stall, account-auth attempt, or obsolete app-update prompt during the final physical test.

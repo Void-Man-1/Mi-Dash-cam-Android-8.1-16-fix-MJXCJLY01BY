@@ -86,12 +86,18 @@ Completed for the 2.0.0 candidate:
 - clean installs on the physical Android 12 and Android 16 phones;
 - visible main screen, `Version: 2.0.0`, `Offline account`, `No Mi account connected`, Add camera, every local help/manual page, and bundled PDF handoff on both physical phones;
 - zero fatal exceptions or ANRs in those physical clean-install UI sequences;
+- clean installs on physical Android 8.1/API 27 and Android 9/API 28 phones through Android Device Streaming;
+- main screen, Offline account, Add camera, all four offline help/manual routes, PDF handoff, and two additional cold relaunches on both older phones;
+- PDF rendering on Android 8.1 and Android's PDF application chooser on Android 9;
+- zero captured app crashes, ANR events, or Xiaomi-account authentication signals in the Android 8.1/9 sequences;
 - Android 15 MuMu same-debug-key candidate replacement and clean-app-data launch;
 - zero fatal exceptions, ANR records, or Xiaomi-auth references in the tested MuMu launch windows.
 
 Required before release:
 
 - complete repeated physical connection cycles with the camera, including live preview, recording list, download, and replay after reconnecting.
+
+The remotely hosted Android 8.1 and Android 9 phones could not join the dashcam's local Wi-Fi. Their results verify phone-side app/UI compatibility only and do not close the real-camera release gate.
 
 See [the 2.0.0 verification report](TEST_REPORT_2.0.0.md) for the current evidence boundary and [the 1.1.9 verification report](TEST_REPORT_1.1.9.md) for the historical full hardware acceptance.
 
