@@ -1,0 +1,73 @@
+name: Compatibility bug report
+description: Report a problem with the MJXCJLY01BY EU patch on a specific Android device
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: checkboxes
+    id: camera
+    attributes:
+      label: Camera confirmation
+      options:
+        - label: The camera label says MJXCJLY01BY (not MJXCJLY02BY / Mi Dash Cam 1S).
+          required: true
+  - type: input
+    id: phone
+    attributes:
+      label: Phone manufacturer and exact model
+      placeholder: "Example: Xiaomi Poco F6"
+    validations:
+      required: true
+  - type: input
+    id: android
+    attributes:
+      label: Android, vendor skin, and build
+      placeholder: "Example: Android 16, HyperOS 3.0.x, EU build"
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: App version
+      placeholder: "Example: 2.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Install type
+      options:
+        - Clean install
+        - Upgrade from an earlier 2.x release
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce from a cold start
+      description: Include the exact navigation sequence and whether the phone was joined to camera Wi-Fi.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual result
+    validations:
+      required: true
+  - type: checkboxes
+    id: functions
+    attributes:
+      label: Function results
+      options:
+        - label: Camera Wi-Fi connection tested
+        - label: Live preview tested
+        - label: Recording list/thumbnails tested
+        - label: Download tested
+        - label: Replay tested
+        - label: Full-screen/rotation tested
+        - label: Disconnect/reconnect tested
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted screenshots or logs
+      description: Never post credentials, access tokens, Wi-Fi passwords, signing keys, or unredacted packet captures.

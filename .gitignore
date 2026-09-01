@@ -1,0 +1,41 @@
+# Local GitHub Release payload. Upload the APK as a Release asset instead of
+# committing a 30 MB binary to repository history.
+/release-assets/*.apk
+/release-assets/*.idsig
+*.apk
+
+# Signing keys and credentials must never enter the public repository.
+/signing/
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pem
+*.key
+*.idsig
+
+# Private/original inputs and generated reverse-engineering workspaces.
+/source/original/
+/source/decoded/
+/analysis/
+/audit/
+/archive/
+/build/
+/tools/
+/tmp/
+/work/
+
+# Local device evidence can contain identifiers or network details.
+*.pcap
+*.pcapng
+*.log
+bugreport-*
+
+# IDE and operating-system clutter.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.tmp
