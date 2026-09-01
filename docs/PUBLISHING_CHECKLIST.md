@@ -13,11 +13,11 @@
 
 ## Create the GitHub repository
 
-- [ ] Use the values in `docs/GITHUB_LISTING.md`.
-- [ ] Set the default branch to `main`.
-- [ ] Add the suggested topics so model-number and Android searches can find the project.
-- [ ] Enable Issues for structured device reports.
-- [ ] Do not enable GitHub Pages unless a separate website is actually needed; the README is the repository landing page.
+- [x] Use the values in `docs/GITHUB_LISTING.md`.
+- [x] Set the default branch to `main`.
+- [x] Add the suggested topics so model-number and Android searches can find the project.
+- [x] Enable Issues for structured device reports.
+- [x] Leave GitHub Pages disabled; the README is the repository landing page.
 
 ## Accept release 2.0.0
 

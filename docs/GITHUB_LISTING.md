@@ -1,6 +1,6 @@
 # GitHub repository listing
 
-Use these values when creating the remote repository.
+These values define the public repository listing.
 
 ## Repository name
 
