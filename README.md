@@ -27,15 +27,15 @@
 
 ## What is this?
 
-This is an unofficial community fix for the European Xiaomi Mi Dash Cam `MJXCJLY01BY`. The camera still works, but its original phone app was abandoned: it crashes on newer phones, parts of it lead to dead web pages, and the current Mi Home app does not provide a working replacement for this model.
+This repository provides an unofficial compatibility version of the European Mi Dash Cam app for the Xiaomi Mi Dash Cam `MJXCJLY01BY`. It is intended specifically for this camera model and the European app variant.
 
-Version 2.0.0 makes the old app useful again. It opens without a Mi account and restores the main features needed to use the camera from a phone. Instead of throwing away working hardware, owners can connect to it locally and keep using what they already bought.
+Version 2.0.0 works locally without a Mi account and restores the phone features needed to set up and use the dashcam.
 
 The app has been checked on real phones running Android 8.1, 9, 12, and 16, with additional Android 13–15 testing described below. A complete camera test on a Poco F6 confirmed live view, recordings, download, and playback with the earlier 1.1.9 build. Before 2.0.0 is published, it still needs one final real-camera test focused on leaving the camera and connecting to it again several times.
 
 This repository contains the explanation, screenshots, checksums, and test results. The patched app will be added to GitHub Releases after that final test passes.
 
-The camera itself still records good video. The problem was its old phone app. This patch brings back the everyday features the hardware was sold with:
+The patched app provides:
 
 - connect to the dashcam over Wi-Fi;
 - see the live camera view;
