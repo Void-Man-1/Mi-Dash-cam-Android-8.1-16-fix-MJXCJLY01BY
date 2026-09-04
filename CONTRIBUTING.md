@@ -20,13 +20,13 @@ Do not post Mi-account credentials, access tokens, Wi-Fi passwords, signing keys
 
 ## Acceptance priorities
 
-The Poco F6 / Android 16 / HyperOS 3 real-camera acceptance pass is complete for the historical 1.1.9 baseline. Version 2.0.0 still needs its own repeated connect, leave/disconnect, and reconnect acceptance with the real camera. The highest-value new evidence is now:
+The exact release-signed 2.0.0 APK has completed full real-camera acceptance with a Poco F6 running Android 16 / HyperOS 3. Connection and reconnection, live preview, the recording grid and thumbnails, completed downloads, and recording replay passed. The highest-value new evidence is now:
 
-1. repeated real-camera reconnect cycles with the exact 2.0.0 release candidate;
+1. long-duration preview and repeated disconnect/reconnect stress testing;
 2. a physical Android 13 result and a local-camera/Wi-Fi Android 14 result;
-3. results from additional MJXCJLY01BY firmware revisions;
-4. long-duration preview and repeated disconnect/reconnect stress testing;
-5. physical Android 10 and 11 results, plus reports from additional Android 8.1, 9, 12, 15, and 16 manufacturers.
+3. results from additional `MJXCJLY01BY` firmware revisions;
+4. physical Android 10 and 11 results;
+5. reports from additional Android 8.1, 9, 12, 15, and 16 manufacturers.
 
 ## Changes
 

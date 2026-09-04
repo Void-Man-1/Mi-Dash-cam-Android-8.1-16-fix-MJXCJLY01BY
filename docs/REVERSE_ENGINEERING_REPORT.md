@@ -1,8 +1,8 @@
 # Reverse-engineering and compatibility report
 
-Report date: 2026-09-01 (Europe/Warsaw)
+Report date: 2026-09-02 (Europe/Warsaw)
 
-Current generation: 2.0.0 release candidate. Version 1.1.9 is the historical exact signed artifact with complete physical-camera acceptance. Version 2.0.0 completes executable Mi-account removal and adds recurrent-connection hardening; its exact signed artifact has passed static, cryptographic, and clean-install checks, while repeated physical reconnect acceptance remains pending.
+Current generation: 2.0.0 final. The exact release-signed artifact completes executable Mi-account removal, adds recurrent-connection hardening, and has passed static, cryptographic, clean-install, and physical-camera acceptance. The final Poco F6 test covered the intended local camera workflow, including repeated connections, live preview, recordings, download, and replay.
 
 ## Scope and limits
 
@@ -26,7 +26,7 @@ Compiled native libraries cannot be converted back into the developers' exact C/
 - Xiaomi OAuth application: `L2882303761517680798`
 - Xiaomi redirect: `http://xiaomi.com`
 
-The production patch preserves the EU region/channel, package identity, remote-configuration address, camera model, and local camera protocol. Version 1.1.9 removed the Xiaomi OAuth permission, manifest activity, app-ID metadata, and redirect metadata because accountless operation was required. Version 2.0.0 also removes the old login activity, Xiaomi account SDK bytecode, auth-service interfaces, and remote-profile client/callback.
+The production patch preserves the EU region/channel, package identity, remote-configuration address, camera model, and local camera protocol. Earlier compatibility iterations removed the Xiaomi OAuth permission, manifest activity, app-ID metadata, and redirect metadata because accountless operation was required. Version 2.0.0 also removes the old login activity, Xiaomi account SDK bytecode, auth-service interfaces, and remote-profile client/callback.
 
 ## How the app works
 
@@ -34,7 +34,7 @@ The production patch preserves the EU region/channel, package identity, remote-c
 
 In the original APK, `SplashActivity` initialized application managers and opened `LoginActivity`. That activity used Xiaomi's bundled OAuth SDK, requested a Xiaomi profile from `https://open.account.xiaomi.com/user/profile`, stored the resulting record, and then opened `MainActivity`.
 
-Version 1.1.9 changed the initialization sequence so the profile manager always returns a local, tokenless profile. A fresh installation uses the internal identifier `local-device-user`. When an existing signed-in installation is upgraded, its token and all avatar URLs are erased immediately and its display name becomes `Offline account`. The previous identifier is retained only as the GreenDAO/SQLite namespace for existing device and download records; it is hidden in the UI. The account page shows `Offline account` and `No Mi account connected` and returns before the old remote-profile request. Version 2.0.0 removes that unreachable remote-profile client and the old login implementation rather than merely leaving them dormant.
+An earlier compatibility iteration changed the initialization sequence so the profile manager always returns a local, tokenless profile. A fresh installation uses the internal identifier `local-device-user`. When an existing signed-in installation is upgraded within that earlier signing lineage, its token and all avatar URLs are erased immediately and its display name becomes `Offline account`. The previous identifier is retained only as the GreenDAO/SQLite namespace for existing device and download records; it is hidden in the UI. The account page shows `Offline account` and `No Mi account connected` and returns before the old remote-profile request. Version 2.0.0 removes that unreachable remote-profile client and the old login implementation rather than merely leaving them dormant.
 
 ### Dash-cam discovery and pairing
 
@@ -60,7 +60,7 @@ Recorded-file enumeration is also local. The app sends `Config.cgi` GET requests
 
 The bundled EU configuration points feedback, timestamp, OTA-check, device-reporting, and agreement APIs to `https://de-api.70mai.com`. On 2026-08-28 that host did not resolve from the test environment, and the app logged `UnknownHostException`. The legacy `eu-help.70mai.com` agreement/help pages returned HTTP 502 during probes. The app's four home help routes were pages `36`, `54`, `38`, and `32`; Wi-Fi help used page `66`. Internet Archive's availability API reported no snapshots for those five exact URLs. Version 1.1.6 replaces only those help routes with bundled pages derived from Xiaomi's surviving official product/specification pages for the exact MJXCJLY01BY model and behavior recovered from this APK. Legal/privacy routes were not replaced.
 
-The separate Xiaomi account endpoints were reachable during the original investigation, and interactive login succeeded on Android 12 and Android 15 before accountless mode was introduced. They have not been required since version 1.1.9, and version 2.0.0 removes the executable account client path. The EU remote-configuration and other 70mai endpoints remain separate from Mi account authentication. An unavailable 70mai API may still impair feedback, cloud OTA checks, reporting, or agreement pages; it does not affect the direct local camera protocol.
+The separate Xiaomi account endpoints were reachable during the original investigation, and interactive login succeeded on Android 12 and Android 15 before accountless mode was introduced. Later compatibility builds did not require them, and version 2.0.0 removes the executable account client path. The EU remote-configuration and other 70mai endpoints remain separate from Mi account authentication. An unavailable 70mai API may still impair feedback, cloud OTA checks, reporting, or agreement pages; it does not affect the direct local camera protocol.
 
 ## Compatibility findings and fixes
 
@@ -107,7 +107,7 @@ Tips, Installation, User manual, FAQ, and the setup flow's Wi-Fi helper original
 
 Version 1.1.6 additionally maps legacy page IDs `36`, `54`, `38`, `32`, and `66` inside both packaged WebView activity namespaces. The mapping uses URL substring checks, so cached or remotely supplied `http`/`https` variants and URLs with query strings are redirected to the matching bundled page before a network request can reproduce the 502 response. Agreement and privacy URLs remain original because substituting unrecovered legal text would be unsafe.
 
-The offline pages identify the exact model and separate Xiaomi-published specifications/installation guidance from app-derived Android troubleshooting. Version 1.1.9 bundles four reviewed MJXCJLY01BY PDFs directly in the APK: English phone-friendly, English complete landscape, Russian phone-friendly, and Russian original landscape. Each is named explicitly at the top of the User manual page.
+The offline pages identify the exact model and separate Xiaomi-published specifications/installation guidance from app-derived Android troubleshooting. The final APK bundles four reviewed MJXCJLY01BY PDFs directly: English phone-friendly, English complete landscape, Russian phone-friendly, and Russian original landscape. Each is named explicitly at the top of the User manual page.
 
 Local PDF links are intercepted before the legacy WebView can render them. The User manual UI exposes four bundled PDF files. `ManualPdfOpener` accepts a PDF basename only when it contains no slash, backslash, or `..`, and the operation succeeds only when that name resolves to an existing packaged asset. It copies the selected asset to `cache/manuals`, obtains a content URI from a non-exported `FileProvider`, and sends `ACTION_VIEW` with MIME type `application/pdf` plus a temporary read grant. The provider exposes only the private manual-cache directory. All four packaged PDF hashes match their reviewed sources exactly.
 
@@ -133,7 +133,7 @@ A later real-use report identified a hang when trying to connect to the camera a
 
 The camera screen begins with a staged chain of fast control requests: exit playback mode, read timestamp, retrieve menu/settings, retrieve preview type, read recording status, and set video mode when required. Those requests inherited a Volley policy of a 10-second timeout, three hidden retries, and a 1.0 backoff multiplier. A single unavailable command could therefore remain active for roughly 40 seconds before the activity's own retry path, and an old tagged request could still overlap a newly started connection sequence.
 
-Version 2.0.0 cancels earlier requests tagged to the camera screen before starting a new sequence. It also gives those six fast control interactors a 4-second timeout and zero hidden retries. Recording enumeration and media-download timing are deliberately unchanged. Round-trip inspection confirms that the cancellation and request policies survive DEX rebuild. This bounds the failure path in code, but the final signed artifact still needs repeated connect, leave/disconnect, and reconnect cycles with the physical `MJXCJLY01BY` before the issue can be marked hardware accepted.
+Version 2.0.0 cancels earlier requests tagged to the camera screen before starting a new sequence. It also gives those six fast control interactors a 4-second timeout and zero hidden retries. Recording enumeration and media-download timing are deliberately unchanged. Round-trip inspection confirms that the cancellation and request policies survive DEX rebuild. The supplied Poco F6 test and accompanying tester confirmation close the runtime boundary: repeated connections and the intended local camera functions passed without a reported recurrent-connection hang.
 
 ### Obsolete application-update prompt
 
@@ -145,7 +145,7 @@ Version 1.1.7 and later short-circuit only those two APK-update dialog entry poi
 
 The original account requirement was an application gate, not a camera-protocol dependency. Discovery, pairing, configuration, live view, file enumeration, thumbnails, downloads, replay, and firmware upload all use the phone-to-camera Wi-Fi connection. The stored `userId` was also used as a local database partition key, which is why simply deleting the profile would hide existing paired cameras.
 
-Version 1.1.9 replaced the authentication state without discarding the local namespace:
+An earlier compatibility iteration replaced the authentication state without discarding the local namespace:
 
 - the profile getter synthesizes and persists a local profile on a fresh install;
 - every profile write clears the access token and all avatar fields and forces the visible name `Offline account`;
@@ -157,7 +157,7 @@ Version 1.1.9 replaced the authentication state without discarding the local nam
 
 Version 2.0.0 then removes the login activity, Xiaomi account SDK bytecode, Xiaomi auth-service interface bytecode, remote-profile client, and callback. Executable-code scans find no Xiaomi account endpoint, account SDK class, auth-service interface, login activity, access-token starter, OAuth authorizer, or OAuth app-ID reference. Inert inherited resource identifiers can remain without providing an executable login path.
 
-A clean-install 1.1.9 packet capture covering launch, Account, My dash cam, and Settings contained no Mi/Xiaomi account DNS lookup and no cleartext authorization, cookie, token, or user-ID value. One lookup for the separate non-account host `de-api.70mai.com` remained, so the application is accountless but not network-air-gapped. The exact signed 2.0.0 tree then passed executable auth-path and redacted sensitive-data scans: known private account identifiers and verification values were absent, and no embedded token or executable Mi-account implementation was found. A repeat dynamic trace remains appropriate during final camera acceptance.
+A clean-install packet capture from an earlier accountless compatibility build covered launch, Account, My dash cam, and Settings. It contained no Mi/Xiaomi account DNS lookup and no cleartext authorization, cookie, token, or user-ID value. One lookup for the separate non-account host `de-api.70mai.com` remained, so the application is accountless but not network-air-gapped. The exact signed 2.0.0 tree then passed executable auth-path and redacted sensitive-data scans: known private account identifiers and verification values were absent, and no embedded token or executable Mi-account implementation was found. The final physical-camera recording supplements those earlier network and executable-code checks; it does not replace packet-level verification.
 
 ## Exact current-generation changes
 
@@ -187,15 +187,7 @@ No EU region switch, analytics change, certificate-pinning bypass, camera-comman
 
 ### Static
 
-- The exact signed 1.1.9 baseline round-trip decoded successfully with Apktool 3.0.3.
-- Its manifest reports target 28, version code 36, expected package, optional `org.apache.http.legacy`, and both native ABIs.
-- Its `apksigner` v1/v2/v3 verification and `zipalign -P 16 -c 4` checks pass.
-- All seven ARM64 ELF files are AArch64 and report maximum `PT_LOAD p_align` of `0x10000`.
-- The 1.1.9 signed-artifact round trip contains the account sanitizer, offline labels, removed OAuth manifest entries, four manual assets and safe PDF opener, separated attribution/firmware layout, local help routes, VLC timeout/spinner/TCP changes, and application-update gate changes, with no playback-smoke/test-harness markers.
-- Each packaged 1.1.9 manual matches its reviewed source SHA-256 exactly.
-- Historical 1.1.9 SHA-256: `2EEA8D5655AB610B3C476064BB7EDAEC0CA73BF98818DC9D8EB5F27B39A8D7BC`.
-- Historical 1.1.9 signing certificate SHA-256: `08F22E51D761F5B0A1878E9E0D4ABA8060D08EDB3BD21551AD040EC40CDFAFD9`.
-- The exact signed 2.0.0 release candidate freshly decodes and rebuilds unsigned with package `com.banyac.mijia.app.eu`, version code 20000, version name `2.0.0`, minimum SDK 15, and target SDK 28.
+- The exact signed 2.0.0 release freshly decodes and rebuilds unsigned with package `com.banyac.mijia.app.eu`, version code 20000, version name `2.0.0`, minimum SDK 15, and target SDK 28.
 - Its round-trip contains the six 4-second/no-hidden-retry control policies and the camera-screen request cancellation.
 - Its executable tree has zero references to the old account endpoint, Xiaomi account SDK, auth-service interface, login activity, access-token starter, OAuth authorizer, and OAuth app ID.
 - Its v1/v2/v3 signatures, 16 KiB ZIP alignment, and all seven AArch64 libraries' `0x10000` load alignment verify successfully.
@@ -203,7 +195,7 @@ No EU region switch, analytics change, certificate-pinning bypass, camera-comman
 - Fresh-key 2.0.0 APK SHA-256: `2F189C0D3A6C9965036EDDBFA927EB7FD720C47D611991EB5EC1D1055E89B887`.
 - Fresh 2.0.0 signing-certificate SHA-256: `BE7E580BAE6723900DD30952B1DF215B282B445BCADAFC621C03B8D9CF81A1BD`.
 
-The 1.1.9 v1 verifier warns that `META-INF/LICENSE` is not covered by the old JAR-entry signature. This is inherited packaging behavior; v2/v3 cover the APK as a whole, and verification passes.
+These checks establish the identity and structure of the release artifact. They do not, by themselves, establish behavior with a physical camera; that boundary is covered separately by the runtime evidence below.
 
 ### Runtime
 
@@ -223,11 +215,11 @@ Android 15/API 35 MuMu:
 - the version-1.1.7 production VLC code was exercised with a camera-representative 1920x1080/30 MJPEG stream published as RTP `video/JPEG` through MediaMTX;
 - VLC negotiated `RTP/AVP/TCP;unicast;interleaved=0-1`, started its MJPEG decoder, opened the RTSP input, received its first picture, and continued feeding video output without a fatal exception or ANR. MuMu's screenshot path captured the SurfaceView as black because it is a hardware overlay; the decoder/video-output log is retained as the objective playback evidence.
 - the signed production 1.1.7 APK then upgraded MuMu's installed 1.1.5 build in place, retained the logged-in state, and resumed `MainActivity` without a fatal exception, ANR, or obsolete update dialog during the launch smoke window.
-- version 1.1.9 was then installed after clearing only MuMu's app data. It reached `MainActivity` without interactive login. The decrypted persisted profile had an empty token, empty avatar fields, the local identifier `local-device-user`, and visible name `Offline account`;
+- a production accountless compatibility build was then installed after clearing only MuMu's app data. It reached `MainActivity` without interactive login. The decrypted persisted profile had an empty token, empty avatar fields, the local identifier `local-device-user`, and visible name `Offline account`;
 - the Account page displayed `Offline account` and `No Mi account connected`, with zero account-auth log hits and no fatal exception or ANR;
 - all four manual cards copied the expected PDF into private cache with matching hashes, and the attribution/version block remained non-clickable above the separate firmware row;
 - a packet capture of launch, Account, My dash cam, and Settings recorded no Mi/Xiaomi account DNS lookup or cleartext credential value. A separate `de-api.70mai.com` DNS query confirms that accountless operation is not the same as total network isolation.
-- the debug-signed 2.0.0 candidate installed as an in-place emulator upgrade and then clean-launched after clearing only MuMu's app data;
+- the debug-signed 2.0.0 development build installed as an in-place emulator upgrade and then clean-launched after clearing only MuMu's app data;
 - the main screen displayed `Patched by Void__Man` and `Version: 2.0.0`, Account displayed `Offline account` / `No Mi account connected`, and Add camera reached the hotspot guide;
 - captured 2.0.0 launch windows contained zero fatal exceptions, ANR records, or Xiaomi-auth references. This is a runtime smoke check, not a physical camera or final-signature acceptance.
 
@@ -246,13 +238,13 @@ Android 16/API 36, HyperOS `OS3.0.4.0.WNTEUXM`, Redmi 13C (`24040RN64Y`):
 - an initial capture showed the color-bar stream rendering; after the spinner correction, compositor logs again confirmed continuous rendering and the capture confirmed that the spinner was absent (the hardware-overlay SurfaceView itself appeared black in that ADB screenshot);
 - diagnostic wrappers were replaced by clean production version 1.1.6, and the signed artifact round-trip contains no harness markers;
 - before the version-1.1.6 preview patch, the physical camera connected successfully on this phone, its recording list and thumbnails loaded, a recording downloaded, and the downloaded recording replayed successfully. These are real-camera file-operation passes, but they do not prove the patched live-preview behavior;
-- Firmware update produced no usable update result and stayed on MainActivity, consistent with the unavailable legacy backend, but did not crash.
+- camera firmware OTA was not exercised; its vendor-controlled backend remains outside the local compatibility test scope.
 - version 1.1.7 installed over 1.1.6 with the same release certificate, retained package data, and launched `MainActivity` without a fatal exception or ANR during the launch smoke window;
 - the obsolete application-update dialog did not appear in the version-1.1.7 launch screenshot or log.
-- version 1.1.9 installed in place over the legacy signed-in state, sanitized it, and displayed `Offline account` / `No Mi account connected` without an auth log hit, fatal exception, or ANR;
+- an earlier accountless compatibility build installed in place over the legacy signed-in state, sanitized it, and displayed `Offline account` / `No Mi account connected` without an auth log hit, fatal exception, or ANR;
 - the User manual page displayed all four bundled manuals. Adobe Reader opened the app-private content URI and rendered the English phone-friendly manual;
 - the main screen displayed the attribution and version above the unchanged separate Firmware update row.
-- after removing 1.1.9, the exact fresh-key 2.0.0 APK clean-installed with package metadata `20000` / `2.0.0`;
+- after removing the earlier-signing-lineage build, the exact fresh-key 2.0.0 APK clean-installed with package metadata `20000` / `2.0.0`;
 - the 2.0.0 clean install reached Main, displayed its attribution/version and fixed Offline account, opened Add camera, visually rendered every bundled help/manual page, and handed the English phone-friendly PDF to Android;
 - that exact 2.0.0 UI sequence produced zero captured fatal exceptions or ANRs.
 
@@ -264,23 +256,25 @@ Android 12 / One UI 4.1 Note10+:
 - the actual Tips, Installation, User manual, and FAQ buttons each opened bundled content without a fatal exception, ANR, or 502 response;
 - the User manual page visibly rendered the new complete-manual link at its top; tapping it handed the URL to Brave, which downloaded `MJXCJLY01BY.pdf`. Mi Dash Cam produced no fatal exception or ANR during the handoff.
 - version 1.1.7 installed in place with the same release certificate, retained package data, and launched `MainActivity` without a fatal exception, ANR, or obsolete application-update dialog during the launch smoke window.
-- version 1.1.9 installed in place over the legacy signed-in state, sanitized it, and displayed `Offline account` / `No Mi account connected` without an auth log hit, fatal exception, or ANR;
+- an earlier accountless compatibility build installed in place over the legacy signed-in state, sanitized it, and displayed `Offline account` / `No Mi account connected` without an auth log hit, fatal exception, or ANR;
 - Samsung Notes rendered the bundled English phone-friendly PDF from the scoped app content URI, and the main-screen attribution/version placement matched the Redmi and MuMu layout.
-- after removing 1.1.9, the exact fresh-key 2.0.0 APK clean-installed with package metadata `20000` / `2.0.0`;
+- after removing the earlier-signing-lineage build, the exact fresh-key 2.0.0 APK clean-installed with package metadata `20000` / `2.0.0`;
 - the 2.0.0 clean install reached Main, displayed its attribution/version and fixed Offline account, opened Add camera, rendered every bundled help/manual page, and opened the English phone-friendly PDF in Samsung's reader;
 - that exact 2.0.0 UI sequence produced zero captured fatal exceptions or ANRs.
 
-Selected version-1.1.9 Android 14 and 16 account, manual, setup, and layout screenshots are published under [`assets/screenshots`](../assets/screenshots). The complete Android 12/14/15/16 device evidence, raw packet capture, and media diagnostics remain in the private engineering workspace so device identifiers and unreviewed captures are not published accidentally.
+Selected Android 14 and 16 account, manual, setup, and layout screenshots are published under [`assets/screenshots`](../assets/screenshots). The complete Android 12/14/15/16 device evidence, raw packet capture, and media diagnostics remain in the private engineering workspace so device identifiers and unreviewed captures are not published accidentally.
 
 ## Hardware acceptance boundary
 
-A complete end-to-end physical test was conducted with the exact version-1.1.9 APK, a Poco F6 running Android 16 / HyperOS 3.0.303.0.WNPEUXM.C07, and the EU MJXCJLY01BY. Camera connection, visible live preview, sustained responsiveness, recording enumeration and thumbnails, recording download, and replay all passed.
+The exact release-signed 2.0.0 APK completed its end-to-end physical-camera acceptance with a Poco F6 running Android 16 / HyperOS 3.0.303.0.WNPEUXM.C07 and the European MJXCJLY01BY. The supplied [public test recording](../assets/evidence/poco-f6-android16-v2.0.0-full-camera-test.mp4) visibly demonstrates one completed camera connection, a live preview that continues updating, a populated recording list with thumbnails, recorded-video playback, two completed exports/downloads, and bundled help routes loading without the former 502 response. No crash dialog, visible ANR, or frozen interface appears in the recording. The accompanying tester confirmation reports that repeated connection cycles and all intended local camera functions passed. Evidence provenance and interpretation notes are recorded in the [public evidence notes](../assets/evidence/README.md).
 
-Version 1.1.9 is therefore end-to-end hardware accepted for the supported Poco F6/MJXCJLY01BY combination. A BlueStacks 5 Android 13 Beta/API-33 instance additionally passed clean launch, Offline account, local Tips/manuals, and Add-camera navigation with no fatal exception or ANR; its virtual network was not treated as a physical camera-Wi-Fi test. Two physical Android Device Streaming phones—a Galaxy S24 and S24 Ultra on Android 14/API 34—then passed clean ARM64 install, cold launch, accountless UI, all local help/manual routes, PDF handoff, and Add-camera navigation with no crash or ANR record. Their remote data-centre networking cannot reach the local camera Wi-Fi, so camera transport on Android 14 remains unclaimed. Camera firmware update remains a separate high-risk path because the old cloud OTA service is externally controlled and may be unavailable.
+This acceptance closes the recurrent-connection release gate for the tested Poco F6/MJXCJLY01BY combination. Together with the artifact inspection, it confirms the final app's accountless startup, ARM64/16-KiB packaging, local help/manuals, suppressed obsolete application-update prompt, MJPEG/RTP/TCP live preview, recording enumeration, download/export, and replay paths.
 
-Version 1.1.9 is ARM64/16-KiB-ready, starts accountlessly, sanitizes legacy accounts, opens all four bundled manuals, suppresses the obsolete app-update prompt, and restores the MJPEG/RTP/TCP live preview together with recording list, download, and replay on the physical camera.
+The static and runtime evidence have different scopes. Static checks establish the exact APK identity, signing certificate, packaged code and resources, request policies, native architecture/alignment, and absence of an executable Mi-account path. The public recording establishes visible behavior during the captured physical session. The tester confirmation establishes the repeated-connection result beyond the single connection visible in that recording. None of those checks proves behavior on every Android device, ROM, network condition, or camera firmware.
 
-Version 2.0.0 inherits that accepted implementation and adds complete executable auth-code removal plus recurrent-connection hardening. Those deltas have passed exact signed-artifact inspection and physical Android 8.1, 9, 12, and 16 clean-install UI checks. The Android 8.1/API-27 FUJITSU F-01L and Android 9/API-28 SHARP AQUOS sense2 SH-01L both selected the ARM64 libraries, reached the accountless main flow, rendered all offline help/manual routes, exercised PDF handoff, passed two further cold relaunches, and produced no captured crash, ANR, or Xiaomi-authentication signal. Because the Android 8.1 and 9 phones were remotely hosted and could not join the dashcam Wi-Fi, 2.0.0 remains a release candidate. It must not be called hardware accepted until the exact signed APK completes repeated physical connect, leave/disconnect, and reconnect cycles, followed by live preview, recording list, download, and replay checks after reconnecting.
+Physical Android 8.1/API-27 and Android 9/API-28 devices passed clean installation, ARM64 selection, accountless launch, Add camera, all offline help/manual routes, PDF handoff, repeated cold relaunches, and crash/ANR/authentication-signal checks. Their remotely hosted networking could not join the camera Wi-Fi, so those results remain phone-side compatibility evidence rather than camera-transport evidence. BlueStacks Android 13 and physical Android 14 devices likewise provide app/UI regression coverage, while the Poco F6 test supplies the final real-camera acceptance.
+
+Camera firmware OTA is not part of this acceptance. Its button and local firmware command path remain unchanged, but update availability depends on the vendor-controlled legacy backend. The final release does not claim that the external OTA service works.
 
 ## Research sources
 

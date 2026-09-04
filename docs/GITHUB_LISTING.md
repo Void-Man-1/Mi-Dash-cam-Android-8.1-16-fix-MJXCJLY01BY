@@ -16,7 +16,7 @@ Mi Dash cam Android 8.1-16 fix for Xiaomi MJXCJLY01BY EU: Poco F6/HyperOS 3, liv
 
 ## Suggested social preview text
 
-Keep the Xiaomi Mi Dash Cam MJXCJLY01BY working on modern Android. Community EU APK patch with accountless startup, ARM64/16 KiB support, repaired help/manuals, and RTSP/TCP live preview. The 1.1.9 baseline passed a full Poco F6 / Android 16 / HyperOS 3 hardware test; generation 2.0.0 adds complete auth-code removal and recurrent-reconnect hardening.
+Keep the Xiaomi Mi Dash Cam MJXCJLY01BY working on modern Android. The 2.0.0 EU compatibility release provides accountless startup, ARM64/16 KiB support, repaired help/manuals, RTSP/TCP live preview, and recurrent-reconnect hardening. Full physical-camera operation passed on a Poco F6 running Android 16 / HyperOS 3.
 
 ## First release
 
@@ -26,6 +26,6 @@ Keep the Xiaomi Mi Dash Cam MJXCJLY01BY working on modern Android. Community EU 
 - Checksum file: `checksums/SHA256SUMS.txt`
 - Release notes: `docs/RELEASE_NOTES_2.0.0.md`
 
-Do not create the tag, upload an APK, or describe 2.0.0 as hardware accepted until the exact signed artifact passes the publishing checklist, including repeated physical connect/leave/reconnect cycles with the EU `MJXCJLY01BY`. Version 1.1.9 remains the documented hardware-accepted baseline.
+The exact release-signed 2.0.0 APK passed the publishing acceptance checks with the EU `MJXCJLY01BY` on a Poco F6. Its full physical test covered connection and reconnection, live preview, the recording grid and thumbnails, completed downloads, and recording replay. The camera firmware OTA backend was not part of that acceptance test.
 
 The full model number should appear in the repository name, About description, README title, first paragraph, release title, and topics. Do not call `MJXCJLY01BY` the “1S”; Xiaomi assigns `MJXCJLY02BY` to the Mi Dash Cam 1S.

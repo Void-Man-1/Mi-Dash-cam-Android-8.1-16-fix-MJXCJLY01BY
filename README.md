@@ -10,11 +10,11 @@
 
 <p align="center">
   <img alt="Generation 2.0.0" src="https://img.shields.io/badge/generation-2.0.0-e5484d">
-  <img alt="2.0.0 release candidate" src="https://img.shields.io/badge/status-release%20candidate-f59e0b">
+  <img alt="2.0.0 stable release" src="https://img.shields.io/badge/status-stable%20release-22c55e">
   <img alt="Model MJXCJLY01BY" src="https://img.shields.io/badge/model-MJXCJLY01BY-555555">
   <img alt="EU region" src="https://img.shields.io/badge/region-EU-2563eb">
   <img alt="Android 8.1, 9, and 12 through 16 tested" src="https://img.shields.io/badge/tested-Android%208.1%20%7C%209%20%7C%2012--16-3ddc84">
-  <img alt="1.1.9 Poco F6 hardware accepted" src="https://img.shields.io/badge/1.1.9%20baseline-hardware%20accepted-ff6900">
+  <img alt="Poco F6 hardware accepted" src="https://img.shields.io/badge/Poco%20F6-hardware%20accepted-ff6900">
 </p>
 
 > [!IMPORTANT]
@@ -31,9 +31,9 @@ This repository provides an unofficial compatibility version of the European Mi 
 
 Version 2.0.0 works locally without a Mi account and restores the phone features needed to set up and use the dashcam.
 
-The app has been checked on real phones running Android 8.1, 9, 12, and 16, with additional Android 13–15 testing described below. A complete camera test on a Poco F6 confirmed live view, recordings, download, and playback with the earlier 1.1.9 build. Before 2.0.0 is published, it still needs one final real-camera test focused on leaving the camera and connecting to it again several times.
+The app has been checked on real phones running Android 8.1, 9, 12, and 16, with additional Android 13–15 testing described below. The exact release-signed 2.0.0 APK completed a full physical test on a Poco F6 running Android 16 / HyperOS 3. Camera connection and reconnection, live preview, the recording grid and thumbnails, completed downloads, and recording replay all worked.
 
-This repository contains the explanation, screenshots, checksums, and test results. Developers can review, reproduce, and improve the compatibility work through the [patch source kit](source-kit/README.md) without redistributing the complete decompiled Xiaomi/70mai application. The patched app will be added to GitHub Releases after that final test passes.
+This project provides the release APK through GitHub Releases together with its explanation, screenshots, checksums, and test results. Developers can review, reproduce, and improve the compatibility work through the [patch source kit](source-kit/README.md) without redistributing the complete decompiled Xiaomi/70mai application. The tested APK is available from [GitHub Releases](https://github.com/Void-Man-1/Mi-Dash-cam-Android-8.1-16-fix-MJXCJLY01BY/releases/latest).
 
 The patched app provides:
 
@@ -55,18 +55,18 @@ Rather than discard working hardware because its companion app was abandoned, th
 
 ## Abandonment timeline
 
-Xiaomi/70mai did not publish a formal “this app is abandoned” notice that we could find, so this timeline separates verifiable records from the point where the app became practically unusable.
+No formal Xiaomi/70mai announcement declaring the app abandoned was found, so this timeline separates verifiable records from the point where the app became practically unusable.
 
 | Date | What happened |
 |---|---|
 | January 2018 | Third-party app history records show the European Mi Dash Cam app appearing on Google Play. |
-| 23 May 2018 | Original version 1.1.0 was published. It targeted Android 6 / API 23 and contained only 32-bit ARM libraries. This is the last original release we could verify. ([APKMirror record](https://www.apkmirror.com/apk/70mai-co-ltd/mi-dash-cam-2/mi-dash-cam-2-1-1-0-release/mi-dash-cam-1-1-0-android-apk-download/)) |
+| 23 May 2018 | Original version 1.1.0 was published. It targeted Android 6 / API 23 and contained only 32-bit ARM libraries. This is the last verifiable original release. ([APKMirror record](https://www.apkmirror.com/apk/70mai-co-ltd/mi-dash-cam-2/mi-dash-cam-2-1-1-0-release/mi-dash-cam-1-1-0-android-apk-download/)) |
 | 2018–2024 | No newer original European APK was found. Android, phone CPUs, media libraries, storage rules, and security requirements continued moving forward while the app remained at 1.1.0. |
 | 18 September 2024 | AppBrain records the app as removed from Google Play and still lists 1.1.0 as its final version. ([AppBrain history](https://www.appbrain.com/app/mi-dash-cam/com.banyac.mijia.app.eu)) |
 | Android 15 era | Android began rejecting normal installation of apps targeting below API 24. The original targets API 23, so fresh installation fails on Android 15/16. ([Android documentation](https://developer.android.com/about/versions/15/behavior-changes-all)) |
 | 28 August 2026 | This investigation reproduced the crashes, freezing, black preview, dead update flow, and HTTP 502 help pages. The current Mi Home app also failed to provide a working replacement connection for this EU camera. |
-| 31 August 2026 | Patch `1.1.9-android16-eu9` reached stable status after a complete physical Poco F6 / Android 16 / HyperOS 3 camera test passed. |
-| 1 September 2026 | The new generation became `2.0.0`. It removes the remaining executable Mi-account/login code and adds targeted hardening for a reported hang when connecting to the camera again. Final repeated-connection hardware acceptance is pending. |
+| 1 September 2026 | The new generation became `2.0.0`. It removes the remaining executable Mi-account/login code and adds targeted hardening for a reported hang when connecting to the camera again. |
+| 2 September 2026 | The exact release-signed 2.0.0 APK completed full physical-camera acceptance on a Poco F6 running Android 16 / HyperOS 3. Connection, reconnection, live preview, recordings, thumbnails, download, and replay passed. |
 
 The important point is simple: the hardware outlived its software support by years.
 
@@ -90,7 +90,7 @@ In plain language:
 - The camera connects: Direct Wi-Fi communication with `MJXCJLY01BY` is preserved.
 - Live preview works: The app now uses the network transport expected by the camera instead of leaving a black video area.
 - The app stays responsive: The repeated media-player restart loop was removed, and VideoLAN's upstream asynchronous native-stop fix was backported so a dead RTSP session cannot hold Android's main thread during teardown.
-- Connecting again is bounded: Version 2.0.0 cancels stale camera-screen requests and removes long hidden retries from the fast control commands used during connection. Repeated physical reconnect acceptance is still pending.
+- Connecting again works: Version 2.0.0 cancels stale camera-screen requests and removes long hidden retries from the fast control commands used during connection. Physical connection and reconnection testing passed on the Poco F6.
 - Recordings work: File lists, thumbnails, download, and replay are operational.
 - No Mi account is required: The app starts as `Offline account` and uses the camera locally.
 - The help section works offline: Dead 502 web pages were replaced with built-in help and four clearly named PDF manuals.
@@ -105,18 +105,18 @@ In plain language:
 | Android 8.1 | Exact 2.0.0 clean install and physical app/UI regression verified; camera hardware not tested | FUJITSU F-01L, API 27 |
 | Android 9 | Exact 2.0.0 clean install and physical app/UI regression verified; camera hardware not tested | SHARP AQUOS sense2 (`SH-01L`), API 28 |
 | Android 10–11 | Not tested | No support claim yet |
-| Android 12 | Exact 2.0.0 clean install and app/UI verified; camera/media baseline verified on 1.1.9 | Samsung Galaxy Note10+ (`SM-N975F`), One UI 4.1 |
-| Android 13 | App/UI supported and verified on the 1.1.9 baseline | BlueStacks 5 Android 13 Beta, API 33 (`Tiramisu64`) |
-| Android 14 | App/UI supported and physically verified on the 1.1.9 baseline | Samsung Galaxy S24 (`SM-S921U`) and S24 Ultra (`SM-S928U1`), API 34 |
-| Android 15 | 2.0.0 debug-candidate replacement and clean-data smoke verified; 1.1.9 baseline verified | MuMu Player, API 35 |
-| Android 16 | Exact 2.0.0 clean install and app/UI verified; camera/media baseline verified on 1.1.9 | Redmi 13C (`24040RN64Y`), HyperOS `3.0.4.0.WNTEUXM` |
-| Android 16 | 1.1.9 baseline fully hardware accepted | Poco F6, HyperOS `3.0.303.0.WNPEUXM.C07` |
+| Android 12 | Exact 2.0.0 clean install and physical app/UI verified; final camera acceptance was conducted on Android 16 | Samsung Galaxy Note10+ (`SM-N975F`), One UI 4.1 |
+| Android 13 | App/UI verified in an emulator during development; physical device and camera network not tested | BlueStacks 5 Android 13 Beta, API 33 (`Tiramisu64`) |
+| Android 14 | Physical app/UI regression verified during development; remotely hosted phones could not reach the camera network | Samsung Galaxy S24 (`SM-S921U`) and S24 Ultra (`SM-S928U1`), API 34 |
+| Android 15 | 2.0.0 debug-build replacement and clean-data smoke verified; release-signed APK and camera network not tested | MuMu Player, API 35 |
+| Android 16 | Exact 2.0.0 clean install and physical app/UI verified; not the final camera-test device | Redmi 13C (`24040RN64Y`), HyperOS `3.0.4.0.WNTEUXM` |
+| Android 16 | Exact release-signed 2.0.0 fully hardware accepted with the EU camera | Poco F6, HyperOS `3.0.303.0.WNPEUXM.C07` |
 
-A complete physical test was conducted with the exact 1.1.9 APK and the EU `MJXCJLY01BY` connected to the Poco F6. Startup, camera connection, live preview, sustained responsiveness, recording list and thumbnails, download, and replay all passed. This proves the inherited camera/media baseline; the 2.0.0 reconnect delta still needs its own repeated-session camera test.
+A complete physical test was conducted with the exact release-signed 2.0.0 APK and the EU `MJXCJLY01BY` connected to the Poco F6. Startup, camera connection and reconnection, visible live preview, sustained responsiveness, the recording grid and thumbnails, completed downloads, and recording replay all passed. The [privacy-redacted recording of the acceptance test](assets/evidence/poco-f6-android16-v2.0.0-full-camera-test.mp4) is included in the repository.
 
-On BlueStacks Android 13, the exact APK installed with its ARM64 libraries, cold-launched, showed the tokenless profile, rendered offline Tips/manuals, and opened Add camera with no fatal exception or ANR. BlueStacks' virtual networking was not used as a substitute for a physical camera-Wi-Fi test.
+On BlueStacks Android 13, a development build installed with its ARM64 libraries, cold-launched, showed the tokenless profile, rendered offline Tips/manuals, and opened Add camera with no fatal exception or ANR. BlueStacks' virtual networking was not used as a substitute for a physical camera-Wi-Fi test.
 
-On two physical Android Device Streaming phones running Samsung Android 14/API 34, the exact APK clean-installed as ARM64, cold-launched, showed `Offline account` / `No Mi account connected`, rendered all four local help/manual sections, handed a bundled PDF to Android's resolver, and opened the Add-camera hotspot guide. Android exit history and event logs contained no crash or ANR. Because these phones are hosted remotely in Google's device lab, they cannot join the dashcam's local Wi-Fi and do not replace the Poco F6 camera/live-preview acceptance test.
+On two physical Android Device Streaming phones running Samsung Android 14/API 34, a development build clean-installed as ARM64, cold-launched, showed `Offline account` / `No Mi account connected`, rendered all four local help/manual sections, handed a bundled PDF to Android's resolver, and opened the Add-camera hotspot guide. Android exit history and event logs contained no crash or ANR. Because these phones are hosted remotely in Google's device lab, they cannot join the dashcam's local Wi-Fi and do not replace the Poco F6 camera/live-preview acceptance test.
 
 The exact release-signed 2.0.0 APK was clean-installed on a physical FUJITSU F-01L running Android 8.1/API 27 and a physical SHARP AQUOS sense2 SH-01L running Android 9/API 28 through Android Device Streaming. Both selected the bundled `arm64-v8a` libraries and passed the main screen, `Offline account`, Add camera, Tips, Installation, User manual, FAQ, all four bundled manual entries, and two additional cold relaunches. Android 8.1 rendered the selected PDF; Android 9 handed it to Android and displayed the PDF application chooser. Captured diagnostics contained no app crash, ANR, or Xiaomi-account authentication signal.
 
@@ -124,9 +124,7 @@ Those remotely hosted phones cannot join the `MJXCJLY01BY` local Wi-Fi. They did
 
 ## Download and install
 
-Version 2.0.0 is not ready for public download yet. The exact release-signed file is complete and verified, but publication remains blocked on recurrent-reconnect hardware acceptance. Do not install an unsigned or debug candidate. `Mi-Dash-Cam-EU-2.0.0-android12-16-arm64.apk` will appear on the repository's [GitHub Releases page](https://github.com/Void-Man-1/Mi-Dash-cam-Android-8.1-16-fix-MJXCJLY01BY/releases/latest) only after that final physical test passes.
-
-When the release is published:
+Download the exact release-signed `Mi-Dash-Cam-EU-2.0.0-android12-16-arm64.apk` from the repository's [GitHub Releases page](https://github.com/Void-Man-1/Mi-Dash-cam-Android-8.1-16-fix-MJXCJLY01BY/releases/latest). Do not install an unsigned, debug, or differently signed build presented under the same version.
 
 1. Download the exact 2.0.0 APK from GitHub Releases.
 2. Verify its SHA-256 against [`checksums/SHA256SUMS.txt`](checksums/SHA256SUMS.txt).
@@ -135,35 +133,35 @@ When the release is published:
 5. Launch Mi Dash Cam. It should open directly as `Offline account`, without Mi-account login.
 6. Power on the `MJXCJLY01BY`, join its Wi-Fi network, and add/connect it in the app. The camera network intentionally has no internet; tell Android to stay connected if it warns or tries to switch back to mobile data/another Wi-Fi network.
 
-Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app or community builds 1.1.3–1.1.9 in place. Every future 2.0.0+ release must use the same new release key so upgrades within the new lineage remain possible.
+Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app or earlier community 1.1.x builds in place. Every future 2.0.0+ release must use the same new release key so upgrades within the new lineage remain possible.
 
 ## What it looks like
 
 <p align="center">
-  <img src="assets/screenshots/main-redmi-android16.png" width="230" alt="Mi Dash Cam main screen on Android 16">
+  <img src="assets/screenshots/poco-f6-v2.0.0-main.png" width="230" alt="Mi Dash Cam 2.0.0 main screen on the Poco F6">
   &nbsp;
   <img src="assets/screenshots/offline-account-redmi-android16.png" width="230" alt="Offline account screen on Android 16">
   &nbsp;
   <img src="assets/screenshots/manual-library-redmi-android16.png" width="230" alt="Offline user manual library on Android 16">
 </p>
 
-<p align="center"><em>Historical 1.1.9 baseline: main screen, tokenless Offline account, and bundled manual library on Android 16.</em></p>
+<p align="center"><em>Release 2.0.0 main screen from the final Poco F6 test, with tokenless Offline account and the bundled manual library from Android 16 regression testing.</em></p>
 
 <p align="center">
   <img src="assets/screenshots/poco-f6-hyperos3-android16.jpg" width="300" alt="Poco F6 running HyperOS 3 and Android 16">
 </p>
 
-<p align="center"><em>Poco F6 used for the complete physical-camera acceptance of the historical 1.1.9 baseline: HyperOS 3.0.303.0.WNPEUXM.C07, Android 16.</em></p>
+<p align="center"><em>Poco F6 used for the complete physical-camera acceptance of release 2.0.0: HyperOS 3.0.303.0.WNPEUXM.C07, Android 16.</em></p>
 
 <p align="center">
-  <img src="assets/screenshots/bluestacks-android13-main.png" width="300" alt="Mi Dash Cam running on BlueStacks Android 13">
+  <a href="assets/evidence/poco-f6-android16-v2.0.0-full-camera-test.mp4">
+    <img src="assets/evidence/poco-f6-android16-v2.0.0-video-poster.jpg" width="300" alt="Privacy-redacted live preview during the Poco F6 acceptance recording">
+  </a>
 </p>
 
-<p align="center"><em>Historical 1.1.9 baseline: clean launch on BlueStacks 5 Android 13 Beta / API 33.</em></p>
+<p align="center"><em>Open the privacy-redacted 4:26 physical acceptance recording.</em></p>
 
 <p align="center">
-  <img src="assets/screenshots/galaxy-s24-android14-main.png" width="230" alt="Mi Dash Cam main screen on a physical Galaxy S24 running Android 14">
-  &nbsp;
   <img src="assets/screenshots/galaxy-s24-android14-offline-account.png" width="230" alt="Offline account on a physical Galaxy S24 running Android 14">
   &nbsp;
   <img src="assets/screenshots/galaxy-s24-ultra-android14-add-camera.png" width="230" alt="Add-camera wizard on a physical Galaxy S24 Ultra running Android 14">
@@ -171,7 +169,7 @@ Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app
   <img src="assets/screenshots/galaxy-s24-ultra-android14-manuals.png" width="230" alt="Bundled MJXCJLY01BY manual library on a physical Galaxy S24 Ultra running Android 14">
 </p>
 
-<p align="center"><em>Historical 1.1.9 baseline: physical Galaxy S24/S24 Ultra Android 14/API-34 regression pass via Android Device Streaming.</em></p>
+<p align="center"><em>Development-build physical Galaxy S24/S24 Ultra Android 14/API-34 regression pass via Android Device Streaming.</em></p>
 
 <p align="center">
   <img src="assets/screenshots/fujitsu-f-01l-android8-main.png" width="230" alt="Mi Dash Cam 2.0.0 main screen on a physical FUJITSU F-01L running Android 8.1">
@@ -183,7 +181,7 @@ Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app
   <img src="assets/screenshots/sharp-sh-01l-android9-pdf-handoff.png" width="230" alt="Bundled manual handed to the Android PDF chooser on a physical SHARP AQUOS sense2 SH-01L running Android 9">
 </p>
 
-<p align="center"><em>Exact 2.0.0 candidate: physical Android 8.1/API-27 and Android 9/API-28 app/UI regression pass via Android Device Streaming.</em></p>
+<p align="center"><em>Exact release-signed 2.0.0: physical Android 8.1/API-27 and Android 9/API-28 app/UI regression pass via Android Device Streaming.</em></p>
 
 # Technical details
 
@@ -251,27 +249,28 @@ The firmware button was not repurposed. The legacy OTA result is not guaranteed 
 - Legacy migration code clears stored Mi tokens and avatar URLs when it encounters them, but installing 2.0.0 requires removing any stock or community 1.1.x installation first, so that older app data is not carried into 2.0.0.
 - The old internal identifier can remain only as a local database key for data created within the new 2.0.0+ signing lineage.
 - Five reachable legacy request builders overwrite any field named `xiaomiId` with the anonymous string `offline-local`.
-- A captured fresh 1.1.9 launch/account/device/settings session produced no Mi/Xiaomi account DNS request and no cleartext authorization, cookie, token, or user-ID value. The exact 2.0.0 executable additionally has no reachable Mi-account implementation.
+- A captured fresh compatibility-build launch/account/device/settings session produced no Mi/Xiaomi account DNS request and no cleartext authorization, cookie, token, or user-ID value. The exact 2.0.0 executable additionally has no reachable Mi-account implementation.
 
 The app is accountless, not network-air-gapped. Camera control requires direct local network traffic, and inherited non-account configuration code can still resolve a 70mai service such as `de-api.70mai.com`.
 
 ## Verification
 
-The exact signed 1.1.9 baseline passed:
+The exact release-signed 2.0.0 APK passed:
 
 - APK Signature Scheme v1, v2, and v3 verification;
 - `zipalign -P 16 -c 4`;
 - AArch64/16 KiB ELF checks for all seven ARM64 native libraries;
 - post-sign manifest, DEX, asset, and bundled-manual hash audits;
-- clean or upgrade launch/account/navigation tests on Android 12, 13, 14, 15, and 16;
+- exact clean-install app/UI tests on physical Android 8.1, 9, 12, and 16 phones, with additional development-build coverage on Android 13, 14, and 15;
 - full real-camera operation on Poco F6 / HyperOS 3 / Android 16;
-- physical recording list, thumbnail, download, and replay checks;
+- physical connection and reconnection, recording-grid, thumbnail, completed-download, and replay checks;
 - visible RTSP/RTP-JPEG live preview without the old repeated UI freeze;
-- a fresh-install packet capture with no Mi/Xiaomi account authentication traffic.
+- executable account-path and sensitive-data scans that found no reachable Mi-account implementation or embedded private credential;
+- structural reconnect-policy checks and confirmation of the asynchronous VLC stop backport.
 
-The exact release-signed 2.0.0 candidate additionally passes v1/v2/v3 signature verification, 16 KiB ZIP/ELF alignment, a clean signed-APK decode and unsigned rebuild, exact `20000` / `2.0.0` identity checks, executable account-path and sensitive-data scans, structural reconnect-policy checks, and structural confirmation of the asynchronous VLC stop backport. Clean installs on physical Android 8.1, 9, 12, and 16 phones reached the 2.0.0 main screen, Offline account, Add camera, every local help/manual route, and bundled PDF handoff with zero captured fatal exceptions or ANRs. The Android 8.1 and Android 9 phones also passed two additional cold relaunches and produced zero captured Xiaomi-authentication signals. Android 15 MuMu debug-candidate replacement and clean-data smoke tests also passed; that same-debug-key replacement does not establish upgrade compatibility with Xiaomi's stock app or community 1.1.x builds.
+Static verification also covered a clean signed-APK decode and unsigned rebuild, exact `20000` / `2.0.0` identity checks, all four bundled manual hashes, and removal of the legacy login implementation. Clean installs on physical Android 8.1, 9, 12, and 16 phones reached the main screen, Offline account, Add camera, every local help/manual route, and bundled PDF handoff with zero captured fatal exceptions or ANRs. The Android 8.1 and Android 9 phones also passed two additional cold relaunches and produced zero captured Xiaomi-authentication signals. Android 15 MuMu debug-build replacement and clean-data smoke tests also passed; that same-debug-key replacement does not establish upgrade compatibility with Xiaomi's stock app or community 1.1.x builds.
 
-Repeated real-camera reconnect cycles, followed by live preview, recording list, download, and replay checks after reconnecting, are the remaining release gate. See the [2.0.0 verification report](docs/TEST_REPORT_2.0.0.md) for the exact boundary between completed and pending checks.
+The Poco F6 acceptance recording documents the final real-camera result. See the [2.0.0 verification report](docs/TEST_REPORT_2.0.0.md) and [recorded physical test](assets/evidence/poco-f6-android16-v2.0.0-full-camera-test.mp4).
 
 ## Release identity
 
@@ -298,11 +297,10 @@ The new key must be retained securely and used for every future 2.0.0+ release. 
 
 ## Documentation
 
-- [Release 2.0.0 candidate test report](docs/TEST_REPORT_2.0.0.md)
-- [Historical release 1.1.9 test report](docs/TEST_REPORT_1.1.9.md)
+- [Release 2.0.0 verification report](docs/TEST_REPORT_2.0.0.md)
+- [Poco F6 physical-test evidence](assets/evidence/README.md)
 - [Reverse-engineering and patch report](docs/REVERSE_ENGINEERING_REPORT.md)
 - [Release 2.0.0 notes](docs/RELEASE_NOTES_2.0.0.md)
-- [Historical release 1.1.9 notes](docs/RELEASE_NOTES_1.1.9.md)
 - [Repository listing metadata](docs/GITHUB_LISTING.md)
 - [Publishing checklist](docs/PUBLISHING_CHECKLIST.md)
 - [Reproducible patch source kit](source-kit/README.md)

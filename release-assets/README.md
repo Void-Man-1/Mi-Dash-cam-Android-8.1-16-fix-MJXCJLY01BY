@@ -1,6 +1,6 @@
 # Local release assets
 
-This directory contains the ignored APK that will be attached to GitHub Release `v2.0.0` after final hardware acceptance.
+This directory contains the ignored APK attached to GitHub Release `v2.0.0`.
 
 The APK is intentionally ignored by Git. This keeps the 30 MB binary out of repository history while leaving the release payload organized beside the public repository.
 
@@ -18,4 +18,4 @@ Signing certificate SHA-256:
 
 Version 2.0.0 starts a new signing lineage. It cannot upgrade over Xiaomi's stock app or a community 1.1.x build; either existing app must be uninstalled first, which clears its app data. Every future 2.0.0+ release must use the same new key.
 
-The existing ignored 1.1.9 APK is a historical hardware-accepted baseline, not the planned 2.0.0 release asset.
+The exact release asset completed full physical-camera acceptance with the EU `MJXCJLY01BY` on a Poco F6 running Android 16 / HyperOS 3. Camera connection and reconnection, live preview, recordings and thumbnails, completed downloads, and recording replay passed. Camera firmware OTA was not part of the acceptance test.

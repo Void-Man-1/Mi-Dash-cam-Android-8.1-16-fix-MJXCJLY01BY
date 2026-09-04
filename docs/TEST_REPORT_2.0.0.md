@@ -1,157 +1,163 @@
-# Mi Dash Cam EU 2.0.0 verification report
+# Mi Dash Cam EU 2.0.0 final verification report
 
-- Report date: 2026-09-01
+- Report date: 2026-09-02
 - Package: `com.banyac.mijia.app.eu`
-- Release-candidate version: `20000` / `2.0.0`
+- Version: `20000` / `2.0.0`
 - Intended camera: Xiaomi Mi Dash Cam `MJXCJLY01BY`, European region
-- Release status: not yet published; exact signed candidate verified; repeated-connection hardware acceptance pending
+- Release status: final hardware-accepted release
 
-## Result at this checkpoint
+## Final result
 
-The exact release-signed 2.0.0 candidate passes cryptographic verification, 16 KiB ZIP/ELF alignment, a fresh decode and unsigned rebuild, package/version checks, account-path and sensitive-data scans, and structural checks for the recurrent-connection hardening. Clean installs on physical Android 8.1, 9, 12, and 16 phones also pass startup, Offline account, Add camera, every local help/manual page, and bundled PDF handoff with no captured crash or ANR. The Android 8.1 and Android 9 phones additionally passed two cold relaunch cycles and produced no captured Xiaomi-account authentication signal.
+The exact release-signed 2.0.0 APK passed its build, package-identity, signature, 16 KiB alignment, account-removal, sensitive-data, clean-install, and runtime checks. A complete physical test was then conducted with the European `MJXCJLY01BY` and a Poco F6 running Android 16 / HyperOS 3.
 
-This is not yet final hardware acceptance. The exact APK and signing-certificate hashes are recorded below, but the recurrent connection fix still requires a real-camera test consisting of repeated connect, leave, and reconnect cycles followed by media checks after reconnecting.
+The tester confirmed that repeated camera sessions and the intended local-camera feature set passed on that device. The app connected and connected again after earlier sessions, displayed live preview, remained responsive, enumerated recordings and thumbnails, replayed camera recordings, and completed downloads. No application crash, Android application-not-responding event, obsolete application-update prompt, or Mi Account login request was observed during the accepted workflow.
 
-## Historical hardware-accepted baseline
+A privacy-redacted recording preserves visual evidence for one representative connection and media session. It visibly demonstrates the patched help routes, camera authorization, live updating preview, recording grid and thumbnails, playback, and two completed export/download operations. The recording does not itself show the repeated-connection sequence; that result is an accompanying tester confirmation and is not presented as a frame-visible claim.
 
-Version 1.1.9 is the last exact signed artifact with complete physical-camera acceptance. A full test used a Poco F6 running Android 16 / HyperOS 3.0.303.0.WNPEUXM.C07 and the EU `MJXCJLY01BY`. The app connected to the camera, showed visible live preview, remained responsive, listed recordings and thumbnails, downloaded a recording, and replayed it successfully.
+Camera firmware OTA was not part of acceptance and is not claimed as working or validated.
 
-The 2.0.0 candidate inherits that accepted camera/media implementation and changes the account-removal and recurrent-connection areas described below. Historical results are not presented as proof that the new reconnect delta has passed hardware acceptance.
+## Exact release artifact
 
-## New signing lineage
+- File: `Mi-Dash-Cam-EU-2.0.0-android12-16-arm64.apk`
+- Size: 30,437,934 bytes
+- APK SHA-256: `2F189C0D3A6C9965036EDDBFA927EB7FD720C47D611991EB5EC1D1055E89B887`
+- Signing-certificate SHA-256: `BE7E580BAE6723900DD30952B1DF215B282B445BCADAFC621C03B8D9CF81A1BD`
+- Signer: 4096-bit RSA
+- APK Signature Schemes v1/v2/v3: verified
+- APK Signature Schemes v3.1/v4: not present
+- Package: `com.banyac.mijia.app.eu`
+- `versionCode`: `20000`
+- `versionName`: `2.0.0`
+- `minSdkVersion`: `15`
+- `targetSdkVersion`: `28`
+- `zipalign -P 16 -c 4`: passed
+- Bundled native ABI: `arm64-v8a`
+- ARM64 ELF load-segment alignment: `0x10000`
 
-Version 2.0.0 uses a new release signing key. It cannot upgrade over Xiaomi's stock app or a community 1.1.x build; either existing app must be uninstalled first, which clears its local app data. This clean-install requirement applies to final device acceptance as well as end users.
+The exact APK was decoded afresh and completed an unsigned round-trip rebuild. All seven ARM64 native libraries were verified as AArch64 ELF files. The signed artifact and signing-certificate hashes above define the accepted release.
 
-Every future 2.0.0+ release must use the same new key to preserve in-place upgrades within the new lineage. Its verified signing-certificate SHA-256 is `BE7E580BAE6723900DD30952B1DF215B282B445BCADAFC621C03B8D9CF81A1BD`.
+Version 2.0.0 starts a new signing lineage. It cannot install as an update over Xiaomi's stock APK or an older community-signed APK. The existing installation must be removed first, which clears that installation's local app data. Future releases in this lineage must retain the 2.0.0 signing key for in-place updates.
 
-## 2.0.0 build and identity checks
+## Evidence record
 
-The exact signed release candidate passed:
+The public evidence copy is documented in [the evidence record](../assets/evidence/README.md) and is stored at:
 
-- Apktool build;
-- fresh signed-APK decode and unsigned round-trip rebuild;
-- package `com.banyac.mijia.app.eu`;
-- `versionCode 20000`;
-- `versionName 2.0.0`;
-- `minSdkVersion 15`;
-- `targetSdkVersion 28`.
+`assets/evidence/poco-f6-android16-v2.0.0-full-camera-test.mp4`
 
-Exact artifact identity:
+Its verified public identity is:
 
-- file: `Mi-Dash-Cam-EU-2.0.0-android12-16-arm64.apk`;
-- size: 30,437,934 bytes;
-- APK SHA-256: `2F189C0D3A6C9965036EDDBFA927EB7FD720C47D611991EB5EC1D1055E89B887`;
-- signing-certificate SHA-256: `BE7E580BAE6723900DD30952B1DF215B282B445BCADAFC621C03B8D9CF81A1BD`;
-- signer: 4096-bit RSA;
-- APK Signature Schemes v1/v2/v3: verified;
-- v3.1/v4: not present, as expected for this sideload release;
-- `zipalign -P 16 -c 4`: passed;
-- all seven ARM64 libraries are AArch64 ELF files whose load segments use `0x10000` alignment.
+- SHA-256: `8A7DDA7D8C1ED6B80EB7E446911378E3BB547D95F3380DB4F3A726182FF25959`
+- Size: 7,323,323 bytes
+- Duration: 266.000 seconds
+- Video: H.264, 576 × 1280, fixed 25 fps, 6,650 frames
+- Audio: none
+- Strict decode: passed with zero warnings or errors
 
-A debug-signed candidate was used only for local runtime smoke testing. It is not a distributable release artifact, and its checksum is intentionally omitted to prevent it from being mistaken for the final APK. Its same-key replacement behavior is not evidence that the final fresh-key release can upgrade a stock or community 1.1.x installation.
+The private source recording has the following immutable identity:
 
-## Mi-account removal checks
+- SHA-256: `91F71D11C7EED6F8ABEA23E1326359D25497185288DF43E6513B78534B05F797`
+- Size: 20,298,217 bytes
+- Duration: 266.219 seconds
+- Frame size: 576 × 1280
 
-The exact signed APK's fresh decoded executable tree was scanned for the old account flow. The checks found no executable reference to:
+The public derivative is video-only, has container metadata and audio removed, and redacts nearby-network identifiers, camera identifiers, and identifying camera imagery. Those privacy transformations do not broaden the claims supported by the source recording.
 
-- the Xiaomi account profile endpoint;
-- `com.xiaomi.account` classes;
-- `IXiaomiAuthService`;
-- the removed login activity;
-- `startGetAccessToken`;
-- `XiaomiOAuthorize`;
-- `XIAOMI_APPID`.
+## What the recording visibly demonstrates
 
-The manifest no longer declares the login activity, Xiaomi auth-service permission, OAuth app ID, or redirect metadata. Startup and account fallbacks route to local application screens. The account page displays fixed local labels and does not request a remote profile.
+Timecodes use the source recording sequence. The fixed-frame-rate public derivative retains those positions and ends at 266.000 seconds.
 
-Inert inherited resource names can remain, but they do not form an executable login path. The redacted scan over 5,100 decoded text files found no private-key marker, recognized cloud/developer token, JWT, bearer literal, basic-auth URL, embedded OTP assignment, or token-sensitive URL value. Known private account identifiers and verification values were absent.
+| Time | Visible result |
+|---|---|
+| `00:00–00:05` | The app launches and reaches the patched 2.0.0 main screen. |
+| `00:05–00:16` | Tips, Installation, User manual, and FAQ each render local content without a server-error page or crash. The manual page shows four clearly named English and Russian entries; the individual PDFs are not opened in this recording. |
+| `00:16–00:43` | Add-camera onboarding and Android permission handling complete, followed by connection to the camera's local Wi-Fi. |
+| `00:43–00:55` | Camera authorization completes and the app reports a successful connection. |
+| `00:55–01:07` | The camera screen initializes its preview. |
+| `01:07–01:23` | Live windshield preview is displayed and visibly updates rather than remaining a frozen still. |
+| `01:23–01:37` | The recording browser loads a populated grid with thumbnails and durations. |
+| `01:37–01:50` | A selected recording opens and plays; its timeline advances and its image changes. |
+| `01:53–03:03` | The first export/download progresses to completion and reports success. |
+| `03:24–04:19` | A second export/download progresses to completion and reports success. |
+| `04:19–04:26` | The app remains responsive on the playback screen. |
 
-## Recurrent-connection diagnosis and code checks
+No crash dialog or Android application-not-responding dialog is visible. Preview initialization takes approximately 12 seconds and the recording grid approximately nine seconds; active loading indicators remain visible during those intervals. Both transfer sequences show continuing percentage progress.
 
-The reported hang occurs when trying to connect again after an earlier camera session. It is not a simultaneous two-phone connection report.
+## Visual-evidence boundary
 
-The camera screen initializes a sequence of fast control requests before live preview. The original request policy allowed a 10-second timeout and three hidden retries for each of these commands. That could keep one control request active for roughly 40 seconds before the activity's own retry handling, making a failed reconnect appear frozen.
+The recording alone does not visually demonstrate:
 
-The 2.0.0 candidate now:
+- a disconnect followed by a second camera connection;
+- the phone model or Android version;
+- the Device settings screen;
+- the short-clip recording control;
+- recording deletion;
+- opening each individual bundled PDF;
+- the Offline account screen or an inspection of stored app data;
+- independent filesystem inspection of the two exported files;
+- camera firmware OTA.
 
-- cancels earlier requests tagged to the camera screen before beginning a new connection sequence;
-- applies a 4-second timeout and zero hidden retries to playback-exit, timestamp, menu/settings, preview-type, record-status, and video-mode control interactors;
-- leaves recording enumeration and media-download policies unchanged;
-- retains the live-preview handler cleanup, limited error restart behavior, 20-second preview startup allowance, and RTSP/TCP option;
-- backports VideoLAN's upstream asynchronous `nativeStop()` implementation so the old VLC binding no longer performs a potentially unbounded RTSP stop on Android's main thread.
+The Poco F6, Android 16 / HyperOS 3 identity and repeated-connection result come from the accompanying physical-test record. The video does show that no Mi Account login is requested anywhere in the representative camera workflow, but it is not an account-storage forensic capture.
 
-The VLC finding is supported by VideoLAN's own [ANR-prevention commit](https://github.com/videolan/vlc-android/commit/1dbdcb3f3041d57ea0be07b929c3339719ade1b1), which moved `nativeStop()` to a worker thread because VLC modules can hang during stop. VideoLAN issue reports independently reproduce main-thread ANRs after repeated player stops and when an RTSP source disappears from Wi-Fi.
+Device settings, short-clip capture, and deletion were not visually demonstrated in this particular recording. Their absence from the footage is an evidence limitation, not a claim that those controls failed. Firmware OTA remains outside the accepted scope and must not be inferred from the presence of its unchanged button.
 
-Round-trip inspection of the exact signed artifact confirmed these policies, request cancellation, the new `Runnable`, and `Thread.start()` survived DEX rebuild. The first unavailable control stage should now reach the activity retry/error path in seconds rather than accumulating the old hidden retry delay, while a stalled native RTSP teardown can no longer directly block the UI thread. Physical timing and repeated-camera-session behavior remain to be measured with the real camera.
+## Repeated-connection fix and acceptance
 
-## Android 15 runtime smoke
+The reported defect concerned a later connection attempt after an earlier camera session, not simultaneous connections from two phones. The original request policy could leave a fast camera-control request active for roughly 40 seconds because a 10-second timeout was combined with three hidden retries. Native RTSP teardown could also execute synchronously on Android's main thread.
 
-MuMu Player reported Android 15. One debug candidate replaced an earlier candidate signed with the same debug key, and it was then tested after clearing only the emulator app's data.
+Version 2.0.0:
 
-Observed results:
+- cancels earlier requests tagged to the camera screen before a new connection sequence;
+- applies a four-second timeout and zero hidden retries to the fast connection-control requests;
+- preserves the separate recording-enumeration and media-download policies;
+- retains bounded preview-start error handling and RTSP/TCP playback;
+- backports VideoLAN's asynchronous `nativeStop()` behavior so native RTSP teardown cannot directly block Android's main thread.
 
-- launcher activity reached the main screen;
-- the screen showed `Patched by Void__Man` and `Version: 2.0.0` above the separate Firmware update row;
-- Account showed `Offline account` and `No Mi account connected`;
-- Add camera reached the `Turn on Wi-Fi hotspot` screen;
-- fatal exceptions: 0;
-- ANR records: 0;
-- Xiaomi-auth references in the captured launch windows: 0.
+Static round-trip inspection confirmed that the cancellation, retry policies, new runnable, and worker-thread start survived the APK rebuild. The final Poco F6 hardware test then supplied the missing runtime acceptance: the tester confirmed repeated camera sessions completed successfully and the app remained operational.
 
-The post-backport debug candidate was installed in place on the same Android 15 MuMu instance. Package Manager reported `primaryCpuAbi=arm64-v8a`, `versionCode=20000`, and `versionName=2.0.0`; the app launched with zero captured app fatal/ANR lines and zero Xiaomi-auth log references. MuMu cannot reproduce a physical camera disappearing during VLC teardown, so this is a verifier/launch regression check rather than proof of the hardware reconnect result.
+## Account-removal verification
 
-The emulator cannot replace a real `MJXCJLY01BY` Wi-Fi and media test.
+The freshly decoded signed APK was scanned for the removed Xiaomi-account flow. No executable reference was found to the former profile endpoint, Xiaomi account service classes, OAuth activity, token request entry point, OAuth builder, app ID, or redirect metadata. The manifest no longer declares the former login activity or Xiaomi authentication permission.
 
-## Physical Android 12 and Android 16 clean-install smoke
+Startup and account fallbacks use local application screens. The account page displays fixed local Offline account text and does not request a remote profile. Clean-install runtime tests showed no Xiaomi-account authentication signal. A redacted scan over 5,100 decoded text files found no private-key marker, recognized cloud/developer token, JWT, bearer literal, embedded one-time code, or known private account identifier.
 
-The exact signed candidate was clean-installed after removing the historical 1.1.9 app from the available Samsung Android 12 and Redmi Android 16 phones. On both devices:
+## Android coverage
 
-- Package Manager reported `versionCode 20000` and `versionName 2.0.0`;
-- cold launch reached the main screen and kept the app process alive;
-- `Patched by Void__Man` and `Version: 2.0.0` appeared above the unchanged Firmware update row;
-- Account displayed `Offline account` and `No Mi account connected`;
-- Add camera opened the Wi-Fi-hotspot guide;
-- Tips, Installation, User manual, and FAQ rendered bundled local content rather than the obsolete server error page;
-- the manual page exposed all four clearly named PDF links;
-- the English phone-friendly link handed the bundled PDF to Android and opened it successfully;
-- captured fatal exceptions: 0;
-- captured ANRs: 0.
+The release target is Android 8.1 through Android 16, but the depth of testing differs by version. Full camera-hardware acceptance was conducted on Android 16. Android 10 and Android 11 remain untested.
 
-## Physical Android 8.1 and Android 9 clean-install smoke
+| Android | Environment | Coverage |
+|---:|---|---|
+| 8.1 / API 27 | Physical FUJITSU F-01L | Exact signed APK clean install, ARM64 selection, launch, Offline account, Add camera, local help/manual library, PDF rendering, and repeated cold relaunches passed. The remotely hosted phone could not reach the local camera Wi-Fi. |
+| 9 / API 28 | Physical SHARP AQUOS sense2 SH-01L | Exact signed APK clean install, ARM64 selection, launch, Offline account, Add camera, local help/manual library, Android PDF chooser handoff, and repeated cold relaunches passed. The remotely hosted phone could not reach the local camera Wi-Fi. |
+| 10 | Not tested | No direct result is claimed. |
+| 11 | Not tested | No direct result is claimed. |
+| 12 | Physical Samsung Galaxy Note10+ | Exact signed APK clean install and app/UI regression passed. Final camera acceptance was conducted on Android 16. |
+| 13 / API 33 | BlueStacks 5 emulator | Development-build app/UI smoke passed. Physical-device and camera-network behavior were not tested. |
+| 14 / API 34 | Physical Samsung Galaxy S24 and S24 Ultra through Android Device Streaming | Development-build app/UI regression passed. The remotely hosted phones could not reach the local camera Wi-Fi. |
+| 15 / API 35 | MuMu Player | Development-build replacement and clean-data smoke passed. Camera-network behavior was not tested. |
+| 16 | Physical Redmi 13C | Exact signed APK clean install and app/UI regression passed. |
+| 16 | Physical Poco F6, HyperOS `3.0.303.0.WNPEUXM.C07` | Exact release-signed APK completed final camera-hardware acceptance with the European `MJXCJLY01BY`. |
 
-The exact release-signed APK also passed its offline phone-side checks on two older physical phones supplied through Android Device Streaming:
+No captured app crash or ANR appeared in the physical app/UI sequences. Results from emulators and remotely hosted phones are compatibility evidence only and are not substitutes for the Poco F6 camera test.
 
-| Device | Android | API | Selected ABI | Result |
-|---|---:|---:|---|---|
-| FUJITSU F-01L | 8.1.0 | 27 | `arm64-v8a` | Passed |
-| SHARP AQUOS sense2 (`SH-01L`) | 9 | 28 | `arm64-v8a` | Passed |
+## Final assessment
 
-On both phones:
+The exact signed artifact identified in this report is accepted as the final 2.0.0 release for the European Xiaomi Mi Dash Cam `MJXCJLY01BY`.
 
-- the exact APK SHA-256 matched `2F189C0D3A6C9965036EDDBFA927EB7FD720C47D611991EB5EC1D1055E89B887`;
-- Package Manager reported `versionCode 20000`, `versionName 2.0.0`, `minSdk 15`, and `targetSdk 28`;
-- clean installation and the initial cold launch passed;
-- the main screen displayed `Patched by Void__Man`, `Version: 2.0.0`, and the separate unchanged Firmware update row without an obsolete application-update prompt;
-- Account displayed `Offline account` and `No Mi account connected`;
-- Add camera opened the `Turn on Wi-Fi hotspot` guide;
-- Tips, Installation, User manual, and FAQ rendered bundled offline content;
-- the manual library displayed all four bundled PDF choices;
-- two additional force-stop/cold-launch cycles returned to the main screen;
-- captured app crashes: 0;
-- captured ANR events: 0;
-- captured Xiaomi-account authentication signals: 0.
+Accepted scope:
 
-PDF behavior differed only after the app handed the bundled file to Android:
+- accountless app startup and operation;
+- camera connection and tester-confirmed repeated connection;
+- live preview;
+- recording enumeration and thumbnails;
+- recording playback;
+- completed export/download;
+- local Tips, Installation, User manual, and FAQ content;
+- bundled manual library and Android PDF handoff;
+- stable operation across the documented test matrix.
 
-- Android 8.1/API 27 opened and rendered the selected English phone-friendly PDF;
-- Android 9/API 28 displayed Android's application chooser for the selected PDF.
+Excluded scope:
 
-Android Device Streaming phones cannot join the `MJXCJLY01BY` local Wi-Fi. Camera connection, live preview, recording enumeration, download, replay, and recurrent camera-session behavior were not tested on these two phones. These results are physical app/UI regression evidence, not camera-hardware acceptance.
-
-## Remaining final-release gates
-
-1. With the EU `MJXCJLY01BY`, perform multiple complete camera cycles: connect, confirm live preview, leave/disconnect, reconnect, and confirm preview again.
-2. After a repeated connection, enumerate recordings and thumbnails, download a recording, and replay it.
-3. Confirm no fatal exception, ANR, long main-thread stall, account-auth attempt, or obsolete app-update prompt during those cycles.
-
-Until these gates pass, 2.0.0 must be described as a release candidate. The 1.1.9 report remains the evidence for full hardware operation of the inherited camera/media baseline.
+- Xiaomi or camera-vendor cloud services;
+- camera firmware OTA;
+- unsupported camera models or regional variants;
+- untested Android 10 and Android 11 behavior.
