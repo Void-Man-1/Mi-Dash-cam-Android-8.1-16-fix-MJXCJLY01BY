@@ -48,10 +48,10 @@ This open continuity task does not alter the completed test result, but losing t
 
 ## Publish release 2.0.0
 
-- [ ] Create tag `v2.0.0` at the accepted source revision.
-- [ ] Paste the final `docs/RELEASE_NOTES_2.0.0.md` into the GitHub Release description.
-- [ ] Upload `release-assets/Mi-Dash-Cam-EU-2.0.0-android12-16-arm64.apk` as a Release asset.
-- [ ] Publish the release, then test the README's GitHub Releases link in a logged-out browser.
+- [x] Create tag `v2.0.0` at the accepted source revision.
+- [x] Paste the final `docs/RELEASE_NOTES_2.0.0.md` into the GitHub Release description.
+- [x] Upload `release-assets/Mi-Dash-Cam-EU-2.0.0-android12-16-arm64.apk` as a Release asset.
+- [x] Publish the release as latest and confirm the README release link and APK download return HTTP 200 without authentication.
 
 ## Never publish
 
