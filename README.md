@@ -137,7 +137,11 @@ Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app
 
 ## What it looks like
 
-https://github.com/user-attachments/assets/6e64c1ed-b440-42eb-bf7f-9bc8771566df
+<table align="center"><tr><td align="center">
+
+https://github.com/user-attachments/assets/804dea2e-40d6-498c-8e2b-68f1a68e1dcf
+
+</td></tr></table>
 
 <p align="center"><em>Play the 4:26 physical acceptance test above. Personal details, network and device identifiers, and the camera video feed are obscured. <a href="assets/evidence/README.md">Evidence notes and checksums</a>.</em></p>
 
