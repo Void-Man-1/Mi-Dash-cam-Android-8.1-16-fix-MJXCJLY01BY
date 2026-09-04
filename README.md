@@ -138,6 +138,14 @@ Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app
 ## What it looks like
 
 <p align="center">
+  <a href="assets/evidence/poco-f6-android16-v2.0.0-full-camera-test.mp4">
+    <img src="assets/evidence/poco-f6-android16-v2.0.0-video-poster.jpg" width="300" alt="Privacy-redacted Poco F6 physical acceptance-test video">
+  </a>
+</p>
+
+<p align="center"><em>Open the 4:26 physical acceptance-test video. Personal details, network and device identifiers, and the camera video feed are obscured.</em></p>
+
+<p align="center">
   <img src="assets/screenshots/poco-f6-v2.0.0-main.png" width="230" alt="Mi Dash Cam 2.0.0 main screen on the Poco F6">
   &nbsp;
   <img src="assets/screenshots/offline-account-redmi-android16.png" width="230" alt="Offline account screen on Android 16">
@@ -152,14 +160,6 @@ Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app
 </p>
 
 <p align="center"><em>Poco F6 used for the complete physical-camera acceptance of release 2.0.0: HyperOS 3.0.303.0.WNPEUXM.C07, Android 16.</em></p>
-
-<p align="center">
-  <a href="assets/evidence/poco-f6-android16-v2.0.0-full-camera-test.mp4">
-    <img src="assets/evidence/poco-f6-android16-v2.0.0-video-poster.jpg" width="300" alt="Privacy-redacted live preview during the Poco F6 acceptance recording">
-  </a>
-</p>
-
-<p align="center"><em>Open the privacy-redacted 4:26 physical acceptance recording.</em></p>
 
 <p align="center">
   <img src="assets/screenshots/galaxy-s24-android14-offline-account.png" width="230" alt="Offline account on a physical Galaxy S24 running Android 14">
