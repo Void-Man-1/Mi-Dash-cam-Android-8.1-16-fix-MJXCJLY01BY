@@ -137,13 +137,9 @@ Version 2.0.0 begins a new signing lineage. It cannot upgrade Xiaomi's stock app
 
 ## What it looks like
 
-<p align="center">
-  <a href="assets/evidence/poco-f6-android16-v2.0.0-full-camera-test.mp4">
-    <img src="assets/evidence/poco-f6-android16-v2.0.0-video-poster.jpg" width="300" alt="Privacy-redacted Poco F6 physical acceptance-test video">
-  </a>
-</p>
+https://github.com/user-attachments/assets/6e64c1ed-b440-42eb-bf7f-9bc8771566df
 
-<p align="center"><em>Open the 4:26 physical acceptance-test video. Personal details, network and device identifiers, and the camera video feed are obscured.</em></p>
+<p align="center"><em>Play the 4:26 physical acceptance test above. Personal details, network and device identifiers, and the camera video feed are obscured. <a href="assets/evidence/README.md">Evidence notes and checksums</a>.</em></p>
 
 <p align="center">
   <img src="assets/screenshots/poco-f6-v2.0.0-main.png" width="230" alt="Mi Dash Cam 2.0.0 main screen on the Poco F6">
